@@ -1,0 +1,805 @@
+task_id,state_turn,guesser_log_index,exact_match,prefix_match,subsequence_match,overlap_count,actor_tool_count,speculator_tool_count,actor_tools,speculator_tools
+0,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+0,6,1,False,True,True,0,6,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+0,20,2,True,True,True,0,0,0,[],[]
+0,22,3,False,False,False,2,2,4,"[""get_product_details"", ""get_product_details""]","[""get_product_details"", ""get_product_details"", ""get_product_details"", ""exchange_delivered_order_items""]"
+0,28,4,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+0,32,5,True,True,True,0,0,0,[],[]
+1,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+1,6,1,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+1,10,2,False,True,True,0,6,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+1,24,3,False,True,True,0,2,0,"[""get_product_details"", ""get_product_details""]",[]
+1,30,4,False,False,False,0,0,1,[],"[""exchange_delivered_order_items""]"
+1,32,5,False,False,False,1,1,3,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""transfer_to_human_agents""]"
+1,36,6,True,True,True,0,0,0,[],[]
+2,2,0,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""list_all_product_types"", ""get_product_details""]",[]
+2,10,1,True,True,True,0,0,0,[],[]
+2,12,2,False,True,True,0,6,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+2,26,3,True,True,True,0,0,0,[],[]
+2,28,4,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+2,32,5,True,True,True,0,0,0,[],[]
+3,2,0,False,False,False,3,3,4,"[""find_user_id_by_name_zip"", ""list_all_product_types"", ""get_product_details""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip"", ""list_all_product_types"", ""get_product_details""]"
+3,10,1,False,True,True,0,7,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""think""]",[]
+3,26,2,False,False,False,0,0,1,[],"[""modify_pending_order_items""]"
+3,28,3,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+3,32,4,True,True,True,0,0,0,[],[]
+4,2,0,False,False,False,1,3,2,"[""find_user_id_by_name_zip"", ""list_all_product_types"", ""get_product_details""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+4,10,1,True,True,True,0,0,0,[],[]
+4,12,2,False,False,False,2,2,5,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+4,18,3,True,True,True,0,0,0,[],[]
+4,20,4,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+4,24,5,True,True,True,0,0,0,[],[]
+5,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+5,6,1,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+5,10,2,True,True,True,1,1,1,"[""transfer_to_human_agents""]","[""transfer_to_human_agents""]"
+6,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+6,6,1,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+6,10,2,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+6,14,3,False,False,False,0,1,1,"[""find_user_id_by_email""]","[""transfer_to_human_agents""]"
+6,18,4,False,False,False,0,0,1,[],"[""transfer_to_human_agents""]"
+6,20,5,True,True,True,0,0,0,[],[]
+6,22,6,True,True,True,0,0,0,[],[]
+6,24,7,False,False,False,0,0,2,[],"[""find_user_id_by_email"", ""transfer_to_human_agents""]"
+7,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+7,6,1,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+7,10,2,True,True,True,0,0,0,[],[]
+7,12,3,False,False,False,0,0,1,[],"[""transfer_to_human_agents""]"
+7,14,4,False,False,False,0,0,1,[],"[""transfer_to_human_agents""]"
+7,16,5,False,False,False,0,0,1,[],"[""transfer_to_human_agents""]"
+8,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+8,6,1,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+8,10,2,True,True,True,0,0,0,[],[]
+8,12,3,True,True,True,0,0,0,[],[]
+8,14,4,True,True,True,0,0,0,[],[]
+8,16,5,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+8,18,6,True,True,True,0,0,0,[],[]
+8,20,7,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+8,22,8,True,True,True,0,0,0,[],[]
+8,24,9,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+9,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+9,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+9,10,2,True,True,True,0,0,0,[],[]
+9,12,3,True,True,True,0,0,0,[],[]
+9,14,4,True,True,True,0,0,0,[],[]
+9,16,5,True,True,True,0,0,0,[],[]
+9,18,6,False,True,True,0,1,0,"[""list_all_product_types""]",[]
+9,22,7,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+9,26,8,False,True,True,0,1,0,"[""get_product_details""]",[]
+9,30,9,True,True,True,0,0,0,[],[]
+9,32,10,True,True,True,0,0,0,[],[]
+10,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+10,6,1,False,False,True,1,2,1,"[""get_user_details"", ""get_order_details""]","[""get_order_details""]"
+10,12,2,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+10,14,3,False,True,True,0,1,0,"[""get_order_details""]",[]
+10,18,4,True,True,True,0,0,0,[],[]
+10,20,5,True,True,True,0,0,0,[],[]
+10,22,6,False,True,True,0,1,0,"[""transfer_to_human_agents""]",[]
+11,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+11,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+11,10,2,True,True,True,2,2,2,"[""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details""]"
+11,16,3,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+11,18,4,True,True,True,2,2,2,"[""return_delivered_order_items"", ""return_delivered_order_items""]","[""return_delivered_order_items"", ""return_delivered_order_items""]"
+11,24,5,True,True,True,0,0,0,[],[]
+12,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+12,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+12,10,2,False,True,True,1,2,1,"[""get_order_details"", ""get_order_details""]","[""get_order_details""]"
+12,16,3,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+12,18,4,False,True,True,0,1,0,"[""transfer_to_human_agents""]",[]
+13,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+13,6,1,False,False,False,0,0,2,[],"[""get_order_details"", ""get_user_details""]"
+13,8,2,False,False,False,0,0,3,[],"[""get_user_details"", ""get_order_details"", ""get_order_details""]"
+13,10,3,True,True,True,0,0,0,[],[]
+13,12,4,True,True,True,0,0,0,[],[]
+13,14,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+14,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+14,6,1,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+14,14,2,True,True,True,0,0,0,[],[]
+14,16,3,False,True,True,0,2,0,"[""return_delivered_order_items"", ""return_delivered_order_items""]",[]
+14,22,4,True,True,True,0,0,0,[],[]
+15,2,0,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+15,4,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+15,8,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_product_details""]",[]
+15,16,3,True,True,True,1,1,1,"[""modify_pending_order_items""]","[""modify_pending_order_items""]"
+15,20,4,True,True,True,0,0,0,[],[]
+16,2,0,True,True,True,0,0,0,[],[]
+16,4,1,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+16,8,2,False,False,False,4,4,7,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+16,18,3,False,True,True,0,1,0,"[""calculate""]",[]
+16,22,4,False,True,True,3,4,3,"[""cancel_pending_order"", ""cancel_pending_order"", ""return_delivered_order_items"", ""return_delivered_order_items""]","[""cancel_pending_order"", ""cancel_pending_order"", ""return_delivered_order_items""]"
+16,32,5,True,True,True,0,0,0,[],[]
+17,2,0,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+17,4,1,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+17,8,2,False,True,True,0,1,0,"[""get_order_details""]",[]
+17,12,3,True,True,True,0,0,0,[],[]
+17,14,4,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+17,18,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+18,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+18,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+18,12,2,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+18,14,3,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+18,18,4,True,True,True,0,0,0,[],[]
+19,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+19,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+19,10,2,False,True,True,0,1,0,"[""get_user_details""]",[]
+19,14,3,False,True,True,1,6,1,"[""get_order_details"", ""get_order_details"", ""get_product_details"", ""get_product_details"", ""calculate"", ""calculate""]","[""get_order_details""]"
+19,28,4,False,False,False,0,0,3,[],"[""return_delivered_order_items"", ""exchange_delivered_order_items"", ""exchange_delivered_order_items""]"
+19,30,5,False,False,False,2,4,3,"[""return_delivered_order_items"", ""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""transfer_to_human_agents""]","[""return_delivered_order_items"", ""get_order_details"", ""exchange_delivered_order_items""]"
+20,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+20,6,1,True,True,True,0,0,0,[],[]
+20,8,2,False,True,True,0,4,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+20,18,3,False,True,True,0,10,0,"[""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details""]",[]
+20,40,4,False,True,True,0,5,0,"[""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""think"", ""get_order_details"", ""get_order_details""]",[]
+20,52,5,True,True,True,0,0,0,[],[]
+20,54,6,True,True,True,0,0,0,[],[]
+20,56,7,True,True,True,0,0,0,[],[]
+21,2,0,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+21,4,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+21,8,2,False,True,True,0,4,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+21,18,3,True,True,True,0,0,0,[],[]
+21,20,4,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""get_product_details"", ""modify_pending_order_items""]"
+21,24,5,True,True,True,0,0,0,[],[]
+21,26,6,True,True,True,0,0,0,[],[]
+22,2,0,True,True,True,0,0,0,[],[]
+22,4,1,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+22,8,2,False,True,True,0,1,0,"[""modify_user_address""]",[]
+22,12,3,False,True,True,0,3,0,"[""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+22,20,4,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+22,24,5,True,True,True,0,0,0,[],[]
+22,26,6,False,True,True,0,1,0,"[""modify_user_address""]",[]
+22,30,7,True,True,True,0,0,0,[],[]
+23,2,0,False,False,False,1,1,2,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+23,6,1,True,True,True,0,0,0,[],[]
+23,8,2,False,True,True,0,5,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+23,20,3,False,True,True,0,1,0,"[""get_product_details""]",[]
+23,24,4,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+23,28,5,True,True,True,0,0,0,[],[]
+23,30,6,False,False,False,0,0,1,[],"[""get_order_details""]"
+23,32,7,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+23,36,8,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+23,40,9,True,True,True,0,0,0,[],[]
+23,42,10,False,False,False,0,0,1,[],"[""get_order_details""]"
+23,44,11,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+23,48,12,True,True,True,0,0,0,[],[]
+24,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+24,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+24,10,2,False,False,False,0,0,1,[],"[""get_order_details""]"
+24,12,3,False,False,False,2,2,7,"[""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+24,18,4,False,True,True,0,1,0,"[""get_order_details""]",[]
+24,22,5,True,True,True,0,0,0,[],[]
+25,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+25,6,1,False,False,False,0,0,1,[],"[""get_user_details""]"
+25,8,2,True,True,True,1,1,1,"[""get_user_details""]","[""get_user_details""]"
+25,12,3,False,False,False,3,3,4,"[""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+25,20,4,True,True,True,0,0,0,[],[]
+25,22,5,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+25,24,6,False,False,False,0,1,2,"[""transfer_to_human_agents""]","[""return_delivered_order_items"", ""get_order_details""]"
+26,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+26,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+26,12,2,True,True,True,0,0,0,[],[]
+26,14,3,False,True,True,0,1,0,"[""get_order_details""]",[]
+26,18,4,True,True,True,0,0,0,[],[]
+26,20,5,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+26,24,6,True,True,True,0,0,0,[],[]
+27,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+27,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+27,10,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+27,18,3,False,False,False,2,4,2,"[""return_delivered_order_items"", ""get_product_details"", ""exchange_delivered_order_items"", ""transfer_to_human_agents""]","[""get_product_details"", ""return_delivered_order_items""]"
+28,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+28,6,1,False,True,True,0,5,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+28,18,2,True,True,True,0,0,0,[],[]
+28,20,3,False,True,True,0,4,0,"[""return_delivered_order_items"", ""return_delivered_order_items"", ""return_delivered_order_items"", ""cancel_pending_order""]",[]
+28,30,4,False,True,True,0,1,0,"[""calculate""]",[]
+28,34,5,True,True,True,0,0,0,[],[]
+29,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+29,6,1,False,True,True,0,2,0,"[""list_all_product_types"", ""get_product_details""]",[]
+29,12,2,False,True,True,0,1,0,"[""get_user_details""]",[]
+29,16,3,False,True,True,0,1,0,"[""get_order_details""]",[]
+29,20,4,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+29,24,5,True,True,True,0,0,0,[],[]
+29,26,6,False,True,True,0,3,0,"[""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+29,34,7,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+29,38,8,True,True,True,0,0,0,[],[]
+30,2,0,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+30,10,1,False,True,True,0,3,0,"[""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+30,18,2,True,True,True,0,0,0,[],[]
+30,20,3,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+30,24,4,False,True,True,0,1,0,"[""get_order_details""]",[]
+30,28,5,False,True,True,0,2,0,"[""return_delivered_order_items"", ""cancel_pending_order""]",[]
+30,34,6,True,True,True,0,0,0,[],[]
+30,36,7,True,True,True,1,1,1,"[""get_order_details""]","[""get_order_details""]"
+30,40,8,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+30,44,9,True,True,True,0,0,0,[],[]
+31,2,0,False,False,False,1,1,2,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+31,6,1,False,True,True,1,4,1,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details""]"
+31,16,2,True,True,True,0,0,0,[],[]
+31,18,3,True,True,True,0,0,0,[],[]
+31,20,4,False,True,True,0,1,0,"[""get_order_details""]",[]
+31,24,5,True,True,True,1,1,1,"[""cancel_pending_order""]","[""cancel_pending_order""]"
+31,28,6,False,True,True,0,2,0,"[""think"", ""get_order_details""]",[]
+31,34,7,False,True,True,0,1,0,"[""get_order_details""]",[]
+31,38,8,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+31,42,9,True,True,True,0,0,0,[],[]
+32,2,0,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+32,10,1,True,True,True,0,0,0,[],[]
+32,12,2,True,True,True,1,1,1,"[""cancel_pending_order""]","[""cancel_pending_order""]"
+32,16,3,True,True,True,0,0,0,[],[]
+32,18,4,True,True,True,4,4,4,"[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+32,28,5,True,True,True,0,0,0,[],[]
+32,30,6,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+32,34,7,True,True,True,0,0,0,[],[]
+32,36,8,True,True,True,0,0,0,[],[]
+32,38,9,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+32,42,10,True,True,True,0,0,0,[],[]
+33,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+33,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+33,10,2,True,True,True,3,3,3,"[""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_order_details""]"
+33,18,3,True,True,True,0,0,0,[],[]
+33,20,4,True,True,True,0,0,0,[],[]
+33,22,5,False,True,True,0,1,0,"[""modify_user_address""]",[]
+33,26,6,True,True,True,0,0,0,[],[]
+34,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+34,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+34,10,2,True,True,True,1,1,1,"[""get_order_details""]","[""get_order_details""]"
+34,14,3,True,True,True,0,0,0,[],[]
+34,16,4,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+34,20,5,True,True,True,0,0,0,[],[]
+35,2,0,False,True,True,0,2,0,"[""find_user_id_by_email"", ""find_user_id_by_email""]",[]
+35,8,1,False,True,True,2,3,2,"[""get_user_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details""]"
+35,16,2,True,True,True,0,0,0,[],[]
+35,18,3,False,False,False,1,1,4,"[""get_product_details""]","[""return_delivered_order_items"", ""modify_pending_order_items"", ""exchange_delivered_order_items"", ""get_product_details""]"
+35,22,4,True,True,True,0,0,0,[],[]
+35,24,5,False,False,False,0,2,1,"[""return_delivered_order_items"", ""exchange_delivered_order_items""]","[""modify_pending_order_items""]"
+35,30,6,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+35,34,7,True,True,True,0,0,0,[],[]
+36,2,0,False,True,True,0,4,0,"[""find_user_id_by_email"", ""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+36,12,1,True,True,True,0,0,0,[],[]
+36,14,2,True,True,True,0,0,0,[],[]
+36,16,3,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+36,20,4,False,True,True,0,8,0,"[""list_all_product_types"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""think"", ""calculate""]",[]
+36,38,5,True,True,True,1,1,1,"[""modify_pending_order_items""]","[""modify_pending_order_items""]"
+36,42,6,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+36,46,7,True,True,True,0,0,0,[],[]
+37,2,0,False,True,True,0,2,0,"[""find_user_id_by_email"", ""find_user_id_by_name_zip""]",[]
+37,8,1,True,True,True,0,0,0,[],[]
+37,10,2,True,True,True,0,0,0,[],[]
+37,12,3,True,True,True,2,2,2,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details""]"
+37,18,4,True,True,True,0,0,0,[],[]
+37,20,5,False,False,False,5,8,12,"[""list_all_product_types"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""think"", ""calculate""]","[""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details"", ""get_product_details""]"
+37,38,6,False,True,True,1,3,1,"[""modify_pending_order_items"", ""think"", ""modify_pending_order_items""]","[""modify_pending_order_items""]"
+37,46,7,True,True,True,0,0,0,[],[]
+37,48,8,False,False,False,0,0,1,[],"[""get_order_details""]"
+38,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+38,6,1,True,True,True,2,2,2,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details""]"
+38,12,2,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+38,16,3,True,True,True,0,0,0,[],[]
+39,2,0,False,False,False,1,1,2,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+39,6,1,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+39,10,2,False,False,False,0,2,2,"[""find_user_id_by_name_zip"", ""get_user_details""]","[""list_all_product_types"", ""get_product_details""]"
+39,16,3,False,True,True,0,3,0,"[""get_order_details"", ""list_all_product_types"", ""get_product_details""]",[]
+39,24,4,False,True,True,0,1,0,"[""modify_user_address""]",[]
+39,28,5,True,True,True,0,0,0,[],[]
+40,2,0,False,True,True,1,2,1,"[""find_user_id_by_email"", ""get_user_details""]","[""find_user_id_by_email""]"
+40,8,1,False,True,True,0,1,0,"[""get_order_details""]",[]
+40,12,2,False,False,False,0,0,1,[],"[""get_order_details""]"
+40,14,3,True,True,True,0,0,0,[],[]
+40,16,4,True,True,True,1,1,1,"[""modify_pending_order_payment""]","[""modify_pending_order_payment""]"
+40,20,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+41,2,0,True,True,True,0,0,0,[],[]
+41,4,1,False,False,False,0,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email""]"
+41,8,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+41,16,3,False,False,True,1,2,1,"[""list_all_product_types"", ""get_product_details""]","[""get_product_details""]"
+41,22,4,False,False,False,0,0,1,[],"[""modify_pending_order_items""]"
+41,24,5,False,False,False,1,3,2,"[""exchange_delivered_order_items"", ""modify_pending_order_items"", ""modify_user_address""]","[""modify_pending_order_items"", ""get_order_details""]"
+41,32,6,True,True,True,0,0,0,[],[]
+41,34,7,True,True,True,0,0,0,[],[]
+42,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+42,6,1,False,True,True,0,2,0,"[""find_user_id_by_name_zip"", ""get_user_details""]",[]
+42,12,2,False,True,True,0,2,0,"[""get_order_details"", ""get_order_details""]",[]
+42,18,3,True,True,True,0,0,0,[],[]
+42,20,4,True,True,True,2,2,2,"[""modify_pending_order_address"", ""modify_pending_order_address""]","[""modify_pending_order_address"", ""modify_pending_order_address""]"
+42,26,5,False,False,False,0,0,3,[],"[""get_order_details"", ""get_order_details"", ""get_user_details""]"
+42,28,6,False,False,False,0,0,1,[],"[""get_order_details""]"
+42,30,7,False,False,False,0,1,1,"[""modify_pending_order_items""]","[""get_product_details""]"
+42,34,8,False,False,False,0,0,1,[],"[""get_product_details""]"
+42,36,9,True,True,True,0,0,0,[],[]
+43,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+43,6,1,True,True,True,3,3,3,"[""get_user_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details""]"
+43,14,2,True,True,True,0,0,0,[],[]
+43,16,3,True,True,True,1,1,1,"[""modify_user_address""]","[""modify_user_address""]"
+43,20,4,True,True,True,0,0,0,[],[]
+43,22,5,True,True,True,0,0,0,[],[]
+43,24,6,True,True,True,0,0,0,[],[]
+43,26,7,True,True,True,0,0,0,[],[]
+44,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+44,6,1,False,False,False,0,0,2,[],"[""get_user_details"", ""get_order_details""]"
+44,8,2,False,False,False,1,1,5,"[""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+44,12,3,False,True,True,0,1,0,"[""get_product_details""]",[]
+44,16,4,False,False,False,0,1,1,"[""calculate""]","[""modify_pending_order_items""]"
+44,20,5,False,False,False,1,1,3,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""modify_pending_order_items"", ""get_order_details""]"
+44,24,6,True,True,True,0,0,0,[],[]
+45,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+45,6,1,False,True,True,0,1,0,"[""get_order_details""]",[]
+45,10,2,False,False,False,0,0,3,[],"[""get_order_details"", ""get_user_details"", ""get_order_details""]"
+45,12,3,False,False,False,1,1,2,"[""get_order_details""]","[""get_user_details"", ""get_order_details""]"
+45,16,4,False,True,True,0,1,0,"[""get_product_details""]",[]
+45,20,5,False,False,True,1,2,1,"[""exchange_delivered_order_items"", ""get_user_details""]","[""get_user_details""]"
+45,26,6,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+45,30,7,False,False,False,0,0,1,[],"[""get_order_details""]"
+46,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+46,6,1,True,True,True,0,0,0,[],[]
+46,8,2,False,False,False,0,0,3,[],"[""get_order_details"", ""get_user_details"", ""get_order_details""]"
+46,10,3,False,False,False,1,1,3,"[""get_order_details""]","[""get_order_details"", ""get_user_details"", ""get_order_details""]"
+46,14,4,True,True,True,0,0,0,[],[]
+46,16,5,False,True,True,1,2,1,"[""return_delivered_order_items"", ""calculate""]","[""return_delivered_order_items""]"
+46,22,6,True,True,True,0,0,0,[],[]
+47,2,0,False,False,False,1,1,2,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+47,6,1,False,True,True,0,1,0,"[""get_order_details""]",[]
+47,10,2,False,False,False,1,1,3,"[""get_order_details""]","[""get_order_details"", ""get_user_details"", ""get_order_details""]"
+47,14,3,False,False,False,1,1,2,"[""get_order_details""]","[""get_user_details"", ""get_order_details""]"
+47,18,4,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+47,22,5,False,True,True,0,1,0,"[""calculate""]",[]
+47,26,6,True,True,True,0,0,0,[],[]
+48,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+48,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+48,10,2,True,True,True,0,0,0,[],[]
+48,12,3,False,False,False,0,0,1,[],"[""get_user_details""]"
+48,14,4,True,True,True,0,0,0,[],[]
+48,16,5,True,True,True,0,0,0,[],[]
+48,18,6,True,True,True,0,0,0,[],[]
+48,20,7,True,True,True,0,0,0,[],[]
+49,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+49,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+49,12,2,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+49,16,3,True,True,True,0,0,0,[],[]
+50,2,0,True,True,True,0,0,0,[],[]
+50,4,1,True,True,True,0,0,0,[],[]
+50,6,2,False,True,True,0,1,0,"[""transfer_to_human_agents""]",[]
+51,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+51,6,1,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+51,10,2,False,True,True,0,1,0,"[""get_order_details""]",[]
+51,14,3,False,False,False,2,2,5,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+51,20,4,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+51,24,5,True,True,True,0,0,0,[],[]
+52,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+52,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+52,12,2,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+52,16,3,True,True,True,0,0,0,[],[]
+52,18,4,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+52,22,5,True,True,True,0,0,0,[],[]
+53,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+53,6,1,False,False,False,3,3,5,"[""get_user_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+53,14,2,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+53,18,3,True,True,True,0,0,0,[],[]
+54,2,0,False,True,True,0,8,0,"[""find_user_id_by_email"", ""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+54,20,1,True,True,True,2,2,2,"[""cancel_pending_order"", ""cancel_pending_order""]","[""cancel_pending_order"", ""cancel_pending_order""]"
+54,26,2,True,True,True,2,2,2,"[""return_delivered_order_items"", ""return_delivered_order_items""]","[""return_delivered_order_items"", ""return_delivered_order_items""]"
+54,32,3,True,True,True,0,0,0,[],[]
+54,34,4,False,True,True,0,1,0,"[""get_product_details""]",[]
+54,38,5,False,True,True,0,2,0,"[""think"", ""calculate""]",[]
+54,44,6,False,False,False,0,0,1,[],"[""get_user_details""]"
+54,46,7,True,True,True,0,0,0,[],[]
+55,2,0,False,False,False,1,2,2,"[""find_user_id_by_email"", ""find_user_id_by_email""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+55,8,1,False,False,False,1,1,2,"[""get_user_details""]","[""get_user_details"", ""get_order_details""]"
+55,12,2,False,True,True,0,1,0,"[""get_order_details""]",[]
+55,16,3,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+55,18,4,False,False,False,1,1,2,"[""return_delivered_order_items""]","[""return_delivered_order_items"", ""get_order_details""]"
+55,22,5,False,False,False,0,0,9,[],"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+56,2,0,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+56,10,1,True,True,True,0,0,0,[],[]
+56,12,2,False,False,False,0,0,1,[],"[""get_product_details""]"
+57,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+57,6,1,False,True,True,0,2,0,"[""find_user_id_by_name_zip"", ""get_order_details""]",[]
+57,12,2,True,True,True,0,0,0,[],[]
+57,14,3,False,False,False,0,0,1,[],"[""get_product_details""]"
+57,16,4,True,True,True,0,0,0,[],[]
+57,18,5,True,True,True,0,0,0,[],[]
+58,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+58,6,1,False,False,False,2,2,5,"[""get_user_details"", ""get_order_details""]","[""get_order_details"", ""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+58,12,2,False,True,True,0,1,0,"[""get_product_details""]",[]
+58,16,3,False,True,True,0,1,0,"[""get_product_details""]",[]
+58,20,4,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+58,24,5,True,True,True,0,0,0,[],[]
+59,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+59,6,1,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_order_details"", ""get_order_details""]",[]
+59,14,2,True,True,True,0,0,0,[],[]
+59,16,3,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+59,20,4,False,False,False,0,0,1,[],"[""get_order_details""]"
+59,22,5,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+59,26,6,True,True,True,0,0,0,[],[]
+60,2,0,False,False,False,1,1,2,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+60,6,1,False,False,False,1,1,6,"[""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_product_details""]"
+60,10,2,False,False,False,1,1,2,"[""get_product_details""]","[""get_product_details"", ""modify_pending_order_items""]"
+60,14,3,False,False,False,0,0,2,[],"[""modify_pending_order_items"", ""get_order_details""]"
+60,16,4,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+60,20,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+61,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+61,6,1,False,False,False,1,2,2,"[""find_user_id_by_name_zip"", ""get_user_details""]","[""find_user_id_by_name_zip"", ""transfer_to_human_agents""]"
+61,12,2,False,False,False,1,1,4,"[""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_product_details""]"
+61,16,3,False,False,False,1,1,3,"[""get_product_details""]","[""get_product_details"", ""modify_pending_order_items"", ""get_order_details""]"
+61,20,4,False,False,False,0,0,3,[],"[""modify_pending_order_items"", ""modify_pending_order_items"", ""get_order_details""]"
+61,22,5,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+61,26,6,True,True,True,0,0,0,[],[]
+62,2,0,True,True,True,0,0,0,[],[]
+62,4,1,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+62,12,2,False,True,True,0,1,0,"[""get_order_details""]",[]
+62,16,3,True,True,True,0,0,0,[],[]
+62,18,4,False,True,True,0,2,0,"[""list_all_product_types"", ""get_product_details""]",[]
+62,24,5,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+62,28,6,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+62,32,7,True,True,True,0,0,0,[],[]
+62,34,8,False,False,False,0,0,1,[],"[""get_order_details""]"
+63,2,0,True,True,True,0,0,0,[],[]
+63,4,1,False,True,True,0,4,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+63,14,2,True,True,True,0,0,0,[],[]
+63,16,3,False,False,True,1,2,1,"[""list_all_product_types"", ""get_product_details""]","[""get_product_details""]"
+63,22,4,True,True,True,0,0,0,[],[]
+63,24,5,True,True,True,1,1,1,"[""modify_pending_order_items""]","[""modify_pending_order_items""]"
+63,28,6,False,False,False,0,0,1,[],"[""get_order_details""]"
+64,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+64,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+64,12,2,False,True,True,0,1,0,"[""get_product_details""]",[]
+64,16,3,True,True,True,0,0,0,[],[]
+64,18,4,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+64,22,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+65,2,0,False,False,False,1,1,2,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+65,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+65,12,2,False,False,False,0,0,1,[],"[""get_product_details""]"
+65,14,3,True,True,True,0,0,0,[],[]
+65,16,4,True,True,True,0,0,0,[],[]
+66,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+66,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+66,10,2,False,True,True,0,2,0,"[""get_order_details"", ""get_order_details""]",[]
+66,16,3,False,False,False,0,0,1,[],"[""get_product_details""]"
+66,18,4,False,False,False,0,0,1,[],"[""get_product_details""]"
+66,20,5,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+66,24,6,True,True,True,0,0,0,[],[]
+66,26,7,True,True,True,0,0,0,[],[]
+67,2,0,True,True,True,0,0,0,[],[]
+67,4,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+67,8,2,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+67,12,3,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+67,20,4,True,True,True,0,0,0,[],[]
+68,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+68,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+68,10,2,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+68,18,3,True,True,True,0,0,0,[],[]
+69,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+69,6,1,True,True,True,1,1,1,"[""get_user_details""]","[""get_user_details""]"
+69,10,2,True,True,True,1,1,1,"[""get_order_details""]","[""get_order_details""]"
+69,14,3,False,False,False,0,0,1,[],"[""cancel_pending_order""]"
+69,16,4,False,False,False,1,1,2,"[""cancel_pending_order""]","[""cancel_pending_order"", ""get_order_details""]"
+69,20,5,True,True,True,0,0,0,[],[]
+70,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+70,6,1,False,False,True,1,5,1,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details""]"
+70,18,2,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+70,22,3,False,False,False,0,0,1,[],"[""exchange_delivered_order_items""]"
+70,24,4,False,False,False,0,1,4,"[""calculate""]","[""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""get_order_details""]"
+70,28,5,False,False,False,0,0,5,[],"[""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""exchange_delivered_order_items"", ""exchange_delivered_order_items""]"
+71,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+71,6,1,True,True,True,0,0,0,[],[]
+71,8,2,False,True,True,1,2,1,"[""get_user_details"", ""get_order_details""]","[""get_user_details""]"
+71,14,3,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+71,18,4,False,True,True,0,2,0,"[""get_product_details"", ""get_product_details""]",[]
+71,24,5,True,True,True,0,0,0,[],[]
+71,26,6,True,True,True,1,1,1,"[""modify_pending_order_items""]","[""modify_pending_order_items""]"
+71,30,7,True,True,True,0,0,0,[],[]
+72,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+72,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+72,10,2,False,True,True,0,1,0,"[""get_order_details""]",[]
+72,14,3,False,True,True,0,3,0,"[""get_product_details"", ""get_product_details"", ""modify_pending_order_address""]",[]
+72,22,4,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+72,26,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+73,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+73,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+73,12,2,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+73,16,3,True,True,True,0,0,0,[],[]
+74,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+74,6,1,True,True,True,0,0,0,[],[]
+74,8,2,False,False,False,2,2,6,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_product_details""]"
+74,14,3,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+74,18,4,False,False,False,0,0,1,[],"[""modify_pending_order_items""]"
+74,20,5,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+74,24,6,True,True,True,0,0,0,[],[]
+74,26,7,False,True,True,0,1,0,"[""get_order_details""]",[]
+74,30,8,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+74,34,9,True,True,True,0,0,0,[],[]
+75,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+75,6,1,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+75,14,2,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+75,18,3,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+75,22,4,True,True,True,0,0,0,[],[]
+76,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+76,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+76,12,2,True,True,True,0,0,0,[],[]
+76,14,3,False,True,True,0,6,0,"[""modify_pending_order_items"", ""modify_pending_order_items"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_product_details""]",[]
+76,28,4,True,True,True,0,0,0,[],[]
+76,30,5,False,True,True,0,3,0,"[""cancel_pending_order"", ""think"", ""calculate""]",[]
+76,38,6,True,True,True,0,0,0,[],[]
+77,2,0,False,False,False,1,4,2,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details"", ""get_product_details""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+77,12,1,True,True,True,0,0,0,[],[]
+77,14,2,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+77,18,3,True,True,True,0,0,0,[],[]
+78,2,0,False,True,True,0,2,0,"[""find_user_id_by_email"", ""get_order_details""]",[]
+78,8,1,False,True,True,0,1,0,"[""get_order_details""]",[]
+78,12,2,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+78,16,3,True,True,True,0,0,0,[],[]
+78,18,4,False,True,True,0,1,0,"[""get_product_details""]",[]
+78,22,5,False,False,False,0,1,1,"[""exchange_delivered_order_items""]","[""modify_pending_order_items""]"
+78,26,6,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+78,30,7,False,True,True,0,1,0,"[""get_order_details""]",[]
+78,34,8,True,True,True,1,1,1,"[""cancel_pending_order""]","[""cancel_pending_order""]"
+78,38,9,True,True,True,0,0,0,[],[]
+79,2,0,False,True,True,0,3,0,"[""find_user_id_by_name_zip"", ""get_user_details"", ""get_order_details""]",[]
+79,10,1,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+79,14,2,True,True,True,0,0,0,[],[]
+79,16,3,True,True,True,1,1,1,"[""modify_pending_order_items""]","[""modify_pending_order_items""]"
+79,20,4,True,True,True,0,0,0,[],[]
+80,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+80,6,1,False,False,False,0,0,3,[],"[""get_user_details"", ""get_order_details"", ""get_order_details""]"
+80,8,2,False,True,True,1,2,1,"[""get_user_details"", ""get_order_details""]","[""get_user_details""]"
+80,14,3,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+80,18,4,True,True,True,0,0,0,[],[]
+80,20,5,False,False,False,0,0,1,[],"[""exchange_delivered_order_items""]"
+80,22,6,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+80,26,7,True,True,True,0,0,0,[],[]
+80,28,8,True,True,True,0,0,0,[],[]
+81,2,0,False,False,False,1,1,2,"[""find_user_id_by_email""]","[""find_user_id_by_email"", ""find_user_id_by_name_zip""]"
+81,6,1,True,True,True,0,0,0,[],[]
+81,8,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+81,16,3,True,True,True,0,0,0,[],[]
+81,18,4,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+81,22,5,True,True,True,0,0,0,[],[]
+82,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+82,6,1,True,True,True,5,5,5,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+82,18,2,True,True,True,0,0,0,[],[]
+82,20,3,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+82,22,4,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+82,26,5,True,True,True,0,0,0,[],[]
+83,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+83,6,1,False,False,False,2,2,5,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+83,12,2,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+83,16,3,True,True,True,0,0,0,[],[]
+84,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+84,6,1,False,True,True,0,5,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+84,18,2,True,True,True,0,0,0,[],[]
+84,20,3,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+84,24,4,True,True,True,0,0,0,[],[]
+85,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+85,6,1,False,True,True,0,6,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+85,20,2,False,False,False,0,0,1,[],"[""get_product_details""]"
+85,22,3,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+85,26,4,False,False,False,0,0,1,[],"[""modify_pending_order_items""]"
+85,28,5,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+85,32,6,True,True,True,0,0,0,[],[]
+85,34,7,True,True,True,0,0,0,[],[]
+86,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+86,6,1,False,False,False,5,5,9,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+86,18,2,True,True,True,0,0,0,[],[]
+86,20,3,False,False,False,1,2,2,"[""list_all_product_types"", ""get_product_details""]","[""get_product_details"", ""modify_pending_order_items""]"
+86,26,4,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+86,30,5,False,False,False,0,0,1,[],"[""get_order_details""]"
+86,32,6,True,True,True,0,0,0,[],[]
+86,34,7,True,True,True,0,0,0,[],[]
+86,36,8,True,True,True,0,0,0,[],[]
+87,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+87,6,1,False,True,True,1,6,1,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details""]"
+87,20,2,True,True,True,0,0,0,[],[]
+87,22,3,True,True,True,3,3,3,"[""modify_pending_order_address"", ""modify_pending_order_address"", ""modify_pending_order_address""]","[""modify_pending_order_address"", ""modify_pending_order_address"", ""modify_pending_order_address""]"
+87,30,4,True,True,True,0,0,0,[],[]
+87,32,5,True,True,True,1,1,1,"[""modify_user_address""]","[""modify_user_address""]"
+87,36,6,True,True,True,0,0,0,[],[]
+88,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+88,6,1,False,True,True,0,1,0,"[""get_user_details""]",[]
+88,10,2,False,False,False,2,2,3,"[""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details"", ""get_product_details""]"
+88,16,3,False,False,False,1,2,2,"[""list_all_product_types"", ""get_product_details""]","[""get_product_details"", ""modify_pending_order_items""]"
+88,22,4,True,True,True,0,0,0,[],[]
+88,24,5,False,True,True,0,1,0,"[""cancel_pending_order""]",[]
+88,28,6,False,False,False,0,0,2,[],"[""get_order_details"", ""get_order_details""]"
+89,2,0,True,True,True,0,0,0,[],[]
+89,4,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+89,8,2,False,False,False,1,3,2,"[""get_user_details"", ""get_order_details"", ""get_product_details""]","[""list_all_product_types"", ""get_product_details""]"
+89,16,3,False,False,False,0,0,2,[],"[""list_all_product_types"", ""get_product_details""]"
+89,18,4,True,True,True,0,0,0,[],[]
+89,20,5,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+89,24,6,True,True,True,0,0,0,[],[]
+90,2,0,False,True,True,0,3,0,"[""find_user_id_by_email"", ""get_user_details"", ""get_order_details""]",[]
+90,10,1,False,False,False,1,1,2,"[""get_product_details""]","[""list_all_product_types"", ""get_product_details""]"
+90,14,2,False,False,False,0,0,1,[],"[""modify_pending_order_items""]"
+90,16,3,False,False,False,0,0,3,[],"[""cancel_pending_order"", ""get_order_details"", ""cancel_pending_order""]"
+90,18,4,False,False,False,1,1,2,"[""cancel_pending_order""]","[""cancel_pending_order"", ""get_order_details""]"
+90,22,5,True,True,True,0,0,0,[],[]
+91,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+91,6,1,True,True,True,2,2,2,"[""get_user_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details""]"
+91,12,2,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+91,14,3,False,False,False,1,1,2,"[""get_order_details""]","[""return_delivered_order_items"", ""get_order_details""]"
+91,18,4,False,False,False,0,3,4,"[""get_product_details"", ""get_product_details"", ""get_product_details""]","[""return_delivered_order_items"", ""return_delivered_order_items"", ""return_delivered_order_items"", ""get_order_details""]"
+91,26,5,True,True,True,0,0,0,[],[]
+91,28,6,False,False,False,1,2,2,"[""return_delivered_order_items"", ""return_delivered_order_items""]","[""return_delivered_order_items"", ""get_order_details""]"
+91,34,7,True,True,True,0,0,0,[],[]
+92,2,0,False,True,True,0,2,0,"[""find_user_id_by_name_zip"", ""get_user_details""]",[]
+92,8,1,False,True,True,0,1,0,"[""get_order_details""]",[]
+92,12,2,False,False,False,0,2,1,"[""think"", ""get_order_details""]","[""return_delivered_order_items""]"
+92,18,3,False,True,True,0,2,0,"[""return_delivered_order_items"", ""return_delivered_order_items""]",[]
+92,24,4,True,True,True,0,0,0,[],[]
+93,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+93,6,1,False,False,False,0,0,2,[],"[""get_order_details"", ""get_user_details""]"
+93,8,2,False,False,False,0,0,1,[],"[""get_user_details""]"
+93,10,3,True,True,True,0,0,0,[],[]
+93,12,4,True,True,True,0,0,0,[],[]
+94,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+94,6,1,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+94,14,2,False,False,True,1,2,1,"[""list_all_product_types"", ""get_product_details""]","[""get_product_details""]"
+94,20,3,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+94,24,4,True,True,True,0,0,0,[],[]
+95,2,0,True,True,True,0,0,0,[],[]
+95,4,1,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+95,8,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+95,16,3,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+95,20,4,True,True,True,0,0,0,[],[]
+95,22,5,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+95,26,6,True,True,True,0,0,0,[],[]
+96,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+96,6,1,True,True,True,0,0,0,[],[]
+96,8,2,False,False,False,0,0,6,[],"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+96,10,3,True,True,True,0,0,0,[],[]
+96,12,4,True,True,True,0,0,0,[],[]
+96,14,5,True,True,True,0,0,0,[],[]
+96,16,6,True,True,True,0,0,0,[],[]
+97,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+97,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+97,10,2,True,True,True,0,0,0,[],[]
+97,12,3,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+97,18,4,False,True,True,0,1,0,"[""get_order_details""]",[]
+97,22,5,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+97,26,6,False,False,False,0,1,1,"[""get_product_details""]","[""get_order_details""]"
+97,30,7,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+97,34,8,True,True,True,0,0,0,[],[]
+97,36,9,True,True,True,0,0,0,[],[]
+98,2,0,False,False,False,0,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email""]"
+98,6,1,False,False,False,0,0,2,[],"[""get_user_details"", ""get_order_details""]"
+98,8,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_product_details""]",[]
+98,16,3,False,False,False,0,2,1,"[""get_order_details"", ""exchange_delivered_order_items""]","[""modify_pending_order_items""]"
+98,22,4,False,False,False,2,2,3,"[""modify_pending_order_items"", ""modify_pending_order_address""]","[""modify_pending_order_items"", ""modify_pending_order_address"", ""transfer_to_human_agents""]"
+98,28,5,True,True,True,0,0,0,[],[]
+99,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+99,6,1,False,False,False,0,0,2,[],"[""get_order_details"", ""get_user_details""]"
+99,8,2,False,False,False,0,0,5,[],"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+99,10,3,True,True,True,0,0,0,[],[]
+99,12,4,True,True,True,0,0,0,[],[]
+99,14,5,False,False,False,0,0,1,[],"[""get_user_details""]"
+99,16,6,False,False,False,0,0,6,[],"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+99,18,7,False,False,False,0,0,5,[],"[""get_user_details"", ""get_order_details"", ""get_product_details"", ""get_order_details"", ""get_order_details""]"
+99,20,8,True,True,True,0,0,0,[],[]
+100,2,0,False,False,False,0,0,1,[],"[""find_user_id_by_email""]"
+100,4,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+100,8,2,False,False,False,2,4,2,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_user_details""]"
+100,18,3,False,True,True,0,2,0,"[""get_product_details"", ""get_product_details""]",[]
+100,24,4,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+100,28,5,True,True,True,0,0,0,[],[]
+100,30,6,False,True,True,0,1,0,"[""get_order_details""]",[]
+100,34,7,False,False,False,0,0,1,[],"[""cancel_pending_order""]"
+100,36,8,True,True,True,0,0,0,[],[]
+101,2,0,True,True,True,0,0,0,[],[]
+101,4,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+101,8,2,False,True,True,0,6,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+101,22,3,False,False,False,0,0,1,[],"[""get_product_details""]"
+101,24,4,True,True,True,0,0,0,[],[]
+101,26,5,False,False,False,0,0,3,[],"[""get_product_details"", ""get_product_details"", ""return_delivered_order_items""]"
+101,28,6,True,True,True,0,0,0,[],[]
+101,30,7,False,False,False,2,2,5,"[""modify_pending_order_items"", ""return_delivered_order_items""]","[""get_product_details"", ""get_product_details"", ""get_product_details"", ""modify_pending_order_items"", ""return_delivered_order_items""]"
+101,36,8,False,True,True,0,1,0,"[""return_delivered_order_items""]",[]
+101,40,9,True,True,True,0,0,0,[],[]
+102,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+102,6,1,True,True,True,0,0,0,[],[]
+102,8,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+102,16,3,True,True,True,0,0,0,[],[]
+102,18,4,False,True,True,0,1,0,"[""modify_pending_order_address""]",[]
+102,22,5,False,True,True,0,1,0,"[""get_product_details""]",[]
+102,26,6,False,False,False,0,0,1,[],"[""modify_pending_order_items""]"
+102,28,7,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+102,32,8,False,True,True,0,1,0,"[""get_product_details""]",[]
+102,36,9,True,True,True,0,0,0,[],[]
+102,38,10,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+102,42,11,False,False,False,0,0,1,[],"[""get_order_details""]"
+103,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+103,6,1,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+103,10,2,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+103,18,3,True,True,True,0,0,0,[],[]
+103,20,4,False,False,True,1,3,1,"[""get_product_details"", ""think"", ""modify_pending_order_address""]","[""modify_pending_order_address""]"
+103,28,5,False,True,True,1,2,1,"[""modify_pending_order_items"", ""get_product_details""]","[""modify_pending_order_items""]"
+103,34,6,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+103,38,7,True,True,True,0,0,0,[],[]
+104,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+104,6,1,False,False,False,2,2,2,"[""get_user_details"", ""get_order_details""]","[""get_order_details"", ""get_user_details""]"
+104,12,2,True,True,True,0,0,0,[],[]
+104,14,3,False,False,False,0,0,1,[],"[""return_delivered_order_items""]"
+104,16,4,False,False,False,1,1,2,"[""return_delivered_order_items""]","[""return_delivered_order_items"", ""get_order_details""]"
+104,20,5,True,True,True,0,0,0,[],[]
+104,22,6,False,True,True,0,4,0,"[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+104,32,7,True,True,True,1,1,1,"[""modify_pending_order_address""]","[""modify_pending_order_address""]"
+104,36,8,True,True,True,0,0,0,[],[]
+104,38,9,False,False,False,1,2,2,"[""list_all_product_types"", ""get_product_details""]","[""get_product_details"", ""modify_pending_order_items""]"
+104,44,10,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+104,48,11,True,True,True,0,0,0,[],[]
+104,50,12,False,False,False,0,0,4,[],"[""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+104,52,13,True,True,True,0,0,0,[],[]
+105,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+105,6,1,False,True,True,1,3,1,"[""get_user_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details""]"
+105,14,2,True,True,True,0,0,0,[],[]
+105,16,3,False,False,False,2,2,3,"[""return_delivered_order_items"", ""return_delivered_order_items""]","[""return_delivered_order_items"", ""return_delivered_order_items"", ""return_delivered_order_items""]"
+105,22,4,True,True,True,0,0,0,[],[]
+105,24,5,True,True,True,2,2,2,"[""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_order_details""]"
+105,30,6,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+105,34,7,True,True,True,0,0,0,[],[]
+105,36,8,False,False,False,1,2,2,"[""get_order_details"", ""get_product_details""]","[""get_user_details"", ""get_order_details""]"
+105,42,9,True,True,True,1,1,1,"[""modify_pending_order_items""]","[""modify_pending_order_items""]"
+105,46,10,True,True,True,0,0,0,[],[]
+105,48,11,False,True,True,0,1,0,"[""modify_pending_order_address""]",[]
+105,52,12,True,True,True,0,0,0,[],[]
+105,54,13,True,True,True,0,0,0,[],[]
+106,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+106,6,1,False,True,True,1,2,1,"[""get_user_details"", ""get_order_details""]","[""get_user_details""]"
+106,12,2,False,True,True,0,2,0,"[""list_all_product_types"", ""get_product_details""]",[]
+106,18,3,True,True,True,0,0,0,[],[]
+106,20,4,True,True,True,0,0,0,[],[]
+107,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+107,6,1,True,True,True,0,0,0,[],[]
+107,8,2,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+107,12,3,False,True,True,0,3,0,"[""get_user_details"", ""get_order_details"", ""get_order_details""]",[]
+107,20,4,True,True,True,1,1,1,"[""get_product_details""]","[""get_product_details""]"
+107,24,5,False,False,False,0,0,1,[],"[""exchange_delivered_order_items""]"
+107,26,6,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+107,30,7,True,True,True,0,0,0,[],[]
+108,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+108,6,1,False,True,True,1,2,1,"[""get_user_details"", ""get_order_details""]","[""get_user_details""]"
+108,12,2,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+108,16,3,True,True,True,0,0,0,[],[]
+108,18,4,False,True,True,0,1,0,"[""get_order_details""]",[]
+108,22,5,False,True,True,0,1,0,"[""get_product_details""]",[]
+108,26,6,True,True,True,1,1,1,"[""exchange_delivered_order_items""]","[""exchange_delivered_order_items""]"
+108,30,7,True,True,True,0,0,0,[],[]
+109,2,0,True,True,True,0,0,0,[],[]
+109,4,1,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+109,8,2,True,True,True,1,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_name_zip""]"
+109,12,3,True,True,True,4,4,4,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+109,22,4,True,True,True,0,0,0,[],[]
+109,24,5,True,True,True,1,1,1,"[""return_delivered_order_items""]","[""return_delivered_order_items""]"
+109,28,6,True,True,True,0,0,0,[],[]
+110,2,0,True,True,True,1,1,1,"[""find_user_id_by_email""]","[""find_user_id_by_email""]"
+110,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+110,12,2,False,True,True,0,1,0,"[""modify_pending_order_address""]",[]
+110,16,3,True,True,True,0,0,0,[],[]
+110,18,4,True,True,True,1,1,1,"[""modify_user_address""]","[""modify_user_address""]"
+110,22,5,False,True,True,0,2,0,"[""list_all_product_types"", ""get_product_details""]",[]
+110,28,6,True,True,True,0,0,0,[],[]
+110,30,7,False,False,False,0,1,1,"[""exchange_delivered_order_items""]","[""modify_pending_order_items""]"
+110,34,8,True,True,True,0,0,0,[],[]
+110,36,9,True,True,True,0,0,0,[],[]
+111,2,0,False,True,True,0,1,0,"[""find_user_id_by_email""]",[]
+111,6,1,False,True,True,0,2,0,"[""get_user_details"", ""get_order_details""]",[]
+111,12,2,True,True,True,0,0,0,[],[]
+111,14,3,True,True,True,0,0,0,[],[]
+111,16,4,True,True,True,0,0,0,[],[]
+111,18,5,False,False,False,0,0,1,[],"[""transfer_to_human_agents""]"
+111,20,6,False,True,True,0,1,0,"[""get_product_details""]",[]
+111,24,7,True,True,True,0,0,0,[],[]
+111,26,8,False,False,False,0,1,1,"[""exchange_delivered_order_items""]","[""modify_pending_order_items""]"
+111,30,9,False,False,False,1,1,2,"[""modify_pending_order_items""]","[""modify_pending_order_items"", ""get_order_details""]"
+111,34,10,True,True,True,0,0,0,[],[]
+112,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+112,6,1,False,True,True,0,5,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+112,18,2,False,True,True,0,3,0,"[""list_all_product_types"", ""get_product_details"", ""modify_pending_order_address""]",[]
+112,26,3,False,True,True,0,1,0,"[""modify_pending_order_items""]",[]
+112,30,4,False,False,False,0,1,1,"[""get_product_details""]","[""get_order_details""]"
+112,34,5,False,True,True,0,1,0,"[""exchange_delivered_order_items""]",[]
+112,38,6,True,True,True,0,0,0,[],[]
+113,2,0,False,True,True,0,1,0,"[""find_user_id_by_name_zip""]",[]
+113,6,1,True,True,True,0,0,0,[],[]
+113,8,2,False,True,True,0,5,0,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]",[]
+113,20,3,False,False,False,0,0,1,[],"[""modify_pending_order_address""]"
+113,22,4,False,True,True,2,5,2,"[""modify_pending_order_address"", ""modify_pending_order_items"", ""list_all_product_types"", ""get_product_details"", ""modify_pending_order_items""]","[""modify_pending_order_address"", ""modify_pending_order_items""]"
+113,34,5,True,True,True,0,0,0,[],[]
+114,2,0,False,False,False,0,1,1,"[""find_user_id_by_name_zip""]","[""find_user_id_by_email""]"
+114,6,1,False,False,False,5,5,7,"[""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]","[""get_order_details"", ""get_user_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details"", ""get_order_details""]"
+114,18,2,True,True,True,2,2,2,"[""cancel_pending_order"", ""cancel_pending_order""]","[""cancel_pending_order"", ""cancel_pending_order""]"
+114,24,3,True,True,True,0,0,0,[],[]

@@ -1,0 +1,63 @@
+# API Configuration
+api:
+  openai:
+    key: ""
+  local:
+    key: "EMPTY"
+    main_base_url: "http://localhost:8000/v1"
+    guess_base_url: "http://localhost:8001/v1"
+  
+# Model Configuration
+models:
+  openai:
+    main: "gpt-5-2025-08-07"  # Main model for game playing
+    guess: "gpt-5-2025-08-07"  # Smaller model for guess prediction
+  local:
+    root: "./models"
+    main: "Qwen/Qwen3.6-35B-A3B"  # Resolved as ./models/Qwen/Qwen3.6-35B-A3B
+    guess: "Qwen/Qwen3-4B-Instruct"  # Resolved as ./models/Qwen/Qwen3-4B-Instruct
+
+# Game Configuration
+game:
+  num_players: 2
+  error_sleep_time: 60  # Seconds to wait on API errors
+  stop_after: 50  # Stop the game after this many steps
+  agent_name0: "Local"  # Options: "Local" or "OpenAI"
+  agent_name1: "Local"  # Options: "Local" or "OpenAI"
+  num_guesses: 3  # Number of guesses to make per turn
+
+# Guess Model Configuration
+# This is the smaller/faster model used for predicting opponent moves
+guess:
+  model_name: "Qwen/Qwen3-4B-Instruct"  # Model for speculation/guess predictions
+  provider: "local"  # Options: "local" or "openai"
+
+# Path Configuration
+paths:
+  trajectories: "./trajectories/test_trajectories"  # Base directory for all trajectory outputs
+  sample_trajectories: "./trajectories/sample_trajectories"  # Directory with example trajectories
+
+# Analysis Configuration
+analysis:
+  target_steps: [20, 30, 40, 50]  # Steps to analyze for performance
+  output_csv: "analysis_results.csv"  # CSV filename for results
+
+# Prompts Configuration
+prompts:
+  standard_game: |
+    You are a competitive game player. Make sure you read the game instructions
+    carefully, and always follow the required format. Reason extensively and deeply,
+    and then return your move. Important: always return a valid move and a valid move
+    only, even if you are uncertain.
+
+  guess: |
+    Reason very very succinctly about the next move, return {num_guesses} candidates for the next move, ordered from most to least favorable. IMPORTANT FORMAT:
+    Your response must be a comma-separated list of moves in [UCI_MOVE] format, like: [e2e4], [e2e3], [d2d4]
+    (exact syntax with square brackets and commas between moves!). For example: [e2e4], [d2d4], [g1f3].
+    Ensure all moves are from the list of valid moves. Even if uncertain, return exactly {num_guesses} candidates.
+    Reason very very quickly, no need to truly think about each of the candidates, just return the most likely candidates and return precisely {num_guesses} valid moves - no more, no less.
+
+  retry: |
+    Attempt {attempt} failed, please remember that you are acting as {role} in
+    the chess game, and you need to make a valid move from the last valid moves list.
+    Return the move in the format [UCI_MOVE], for example [e2e4].

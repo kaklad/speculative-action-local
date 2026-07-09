@@ -1,0 +1,10 @@
+{
+    "type": "single",
+    "model": {
+        "model": "../../models/Qwen/Qwen3-4B-Instruct",
+        "provider": "local",
+        "base_url": "http://localhost:8001/v1",
+        "temperature": 1,
+        "reasoning": "low"
+    }
+}

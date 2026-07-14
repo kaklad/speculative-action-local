@@ -239,9 +239,36 @@ def main():
     p = argparse.ArgumentParser(description="Add guess predictions to a speculative trajectory (stepsinfo.json).")
     p.add_argument("--config", default=None, help="Path to config YAML (default: chess-game/config.yml or config.yml)")
     p.add_argument("--stepsinfo", "-i", default=None, help="Path to stepsinfo.json (or trajectory dir containing it)")
+    p.add_argument("--base-dir", default=None, help="Process every immediate subdirectory containing stepsinfo.json")
     p.add_argument("--num-guesses", type=int, default=None, help="Number of guesses (default: from config)")
     p.add_argument("--add-spec", action="store_true", help="Add speculative predictions for non-speculative windows")
     args = p.parse_args()
+
+    if args.stepsinfo and args.base_dir:
+        p.error("use either --stepsinfo or --base-dir, not both")
+
+    config = load_config(args.config)
+    if args.num_guesses is not None:
+        config.setdefault("game", {})["num_guesses"] = args.num_guesses
+
+    if args.base_dir:
+        if not os.path.isdir(args.base_dir):
+            p.error(f"base directory not found: {args.base_dir}")
+        candidates = []
+        direct = os.path.join(args.base_dir, "stepsinfo.json")
+        if os.path.isfile(direct):
+            candidates.append(direct)
+        candidates.extend(
+            os.path.join(args.base_dir, name, "stepsinfo.json")
+            for name in sorted(os.listdir(args.base_dir))
+            if os.path.isfile(os.path.join(args.base_dir, name, "stepsinfo.json"))
+        )
+        if not candidates:
+            p.error(f"no stepsinfo.json files found under: {args.base_dir}")
+        for candidate in candidates:
+            process_trajectory_with_guesses(candidate, config=config, add_spec=args.add_spec)
+        print(f"\nProcessed {len(candidates)} trajectories.")
+        return
 
     step_info_path = args.stepsinfo
     if step_info_path is None and len(sys.argv) > 1 and not sys.argv[1].startswith("-"):
@@ -253,10 +280,6 @@ def main():
     if not os.path.exists(step_info_path):
         print(f"Error: File not found: {step_info_path}")
         sys.exit(1)
-
-    config = load_config(args.config)
-    if args.num_guesses is not None:
-        config.setdefault("game", {})["num_guesses"] = args.num_guesses
     output_path = process_trajectory_with_guesses(
         steps_info_path=step_info_path,
         config=config,

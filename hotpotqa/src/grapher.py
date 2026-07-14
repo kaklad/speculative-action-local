@@ -9,11 +9,13 @@ from .utils import Utils
 class Grapher:
 
     @staticmethod
-    def _ensure_image_dir():
-        os.makedirs("./run_metrics/images", exist_ok=True)
+    def _ensure_image_dir(output_dir="./run_metrics"):
+        image_dir = os.path.join(output_dir, "images")
+        os.makedirs(image_dir, exist_ok=True)
+        return image_dir
 
     @staticmethod
-    def graph_agent_times(data, agent, save_graph=True):
+    def graph_agent_times(data, agent, save_graph=True, output_dir="./run_metrics"):
         agent_keys = data[agent].keys()
         guess_models = [key.split('/')[-1] for key in agent_keys]
         normal_times = []
@@ -33,16 +35,16 @@ class Grapher:
         plt.legend()
         plt.tight_layout()
         if save_graph:
-            Grapher._ensure_image_dir()
-            filename = f"./run_metrics/images/AgentTimes_{agent.split('/')[-1]}_top{constants.guess_num_actions}.png"
+            image_dir = Grapher._ensure_image_dir(output_dir)
+            filename = os.path.join(image_dir, f"AgentTimes_{agent.split('/')[-1]}_top{constants.guess_num_actions}.png")
             if os.path.exists(filename):
                 os.remove(filename)
             plt.savefig(filename, dpi=300)
         plt.close()
 
     @staticmethod
-    def graph_metric_comparison(data, save_graph=True):
-        agents = [constants.local_model_name]
+    def graph_metric_comparison(data, save_graph=True, output_dir="./run_metrics"):
+        agents = list(data.keys())
         good_dict = {}
         width = 0.35
         for agent in agents:
@@ -78,16 +80,16 @@ class Grapher:
             plt.legend()
             plt.tight_layout()
             if save_graph:
-                Grapher._ensure_image_dir()
-                filename = f"./run_metrics/images/AgentComparison_{agent_name}.png"
+                image_dir = Grapher._ensure_image_dir(output_dir)
+                filename = os.path.join(image_dir, f"AgentComparison_{agent_name}.png")
                 if os.path.exists(filename):
                     os.remove(filename)
                 plt.savefig(filename, dpi=300)
             plt.close()
 
     @staticmethod
-    def graph_metric3(data, save_graph=True):
-        agents = [constants.local_model_name]
+    def graph_metric3(data, save_graph=True, output_dir="./run_metrics"):
+        agents = list(data.keys())
         width = 0.4
 
         for agent in agents:
@@ -132,8 +134,8 @@ class Grapher:
             plt.tight_layout()
 
             if save_graph:
-                Grapher._ensure_image_dir()
-                filename = f"./run_metrics/images/AgentComparisonProper2_{agent_name}new2.png"
+                image_dir = Grapher._ensure_image_dir(output_dir)
+                filename = os.path.join(image_dir, f"AgentComparisonProper2_{agent_name}new2.png")
                 if os.path.exists(filename):
                     os.remove(filename)
                 plt.savefig(filename, dpi=300)

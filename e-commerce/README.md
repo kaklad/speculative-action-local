@@ -52,3 +52,149 @@ SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` 
 2. Run the `analysis_static_combine.ipynb` notebook to generate the figures in the paper.
 3. The sample figures are saved in the `figures` directory.
 
+## CLI command reference
+
+Run the workflow commands from `speculative-action-local/e-commerce/tau-bench/`.
+
+### Enter the project directory
+
+```bash
+cd /data1/jhkim/speculative-action-local/e-commerce/tau-bench
+```
+
+### Environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .
+```
+
+### Local model servers
+
+```bash
+vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+```
+
+```bash
+vllm serve ../../models/Qwen/Qwen3-4B-Instruct --served-model-name ../../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+```
+
+```bash
+vllm serve ../../models/Qwen/Qwen3-14B-Instruct --served-model-name ../../models/Qwen/Qwen3-14B-Instruct --host 0.0.0.0 --port 8002 --max-model-len 8192
+```
+
+```bash
+curl http://localhost:8000/v1/models
+curl http://localhost:8001/v1/models
+curl http://localhost:8002/v1/models
+```
+
+### Run all local speculative configurations
+
+```bash
+./exp_static.sh
+```
+
+### Run the low configuration
+
+```bash
+python run.py --agent-strategy tool-calling-static --env retail \
+  --model ../../models/Qwen/Qwen3.6-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.6-35B-A3B --user-model-provider local \
+  --user-strategy llm --max-concurrency 10 \
+  --start-index 0 --end-index 115 \
+  --guesser-config guess_configs/local_low.json \
+  --baseline-config historical_trajectories/gpt-4o-retail.json
+```
+
+### Run the medium configuration
+
+```bash
+python run.py --agent-strategy tool-calling-static --env retail \
+  --model ../../models/Qwen/Qwen3.6-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.6-35B-A3B --user-model-provider local \
+  --user-strategy llm --max-concurrency 10 \
+  --start-index 0 --end-index 115 \
+  --guesser-config guess_configs/local_medium.json \
+  --baseline-config historical_trajectories/gpt-4o-retail.json
+```
+
+### Run the high configuration
+
+```bash
+python run.py --agent-strategy tool-calling-static --env retail \
+  --model ../../models/Qwen/Qwen3.6-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.6-35B-A3B --user-model-provider local \
+  --user-strategy llm --max-concurrency 10 \
+  --start-index 0 --end-index 115 \
+  --guesser-config guess_configs/local_high.json \
+  --baseline-config historical_trajectories/gpt-4o-retail.json
+```
+
+### Run selected retail tasks
+
+```bash
+python run.py --agent-strategy tool-calling-static --env retail \
+  --model ../../models/Qwen/Qwen3.6-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.6-35B-A3B --user-model-provider local \
+  --user-strategy llm --max-concurrency 3 \
+  --task-ids 2 4 6 \
+  --guesser-config guess_configs/local_low.json \
+  --baseline-config historical_trajectories/gpt-4o-retail.json
+```
+
+### Choose a custom result directory
+
+```bash
+python run.py --agent-strategy tool-calling-static --env retail \
+  --model ../../models/Qwen/Qwen3.6-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.6-35B-A3B --user-model-provider local \
+  --user-strategy llm --max-concurrency 10 \
+  --start-index 0 --end-index 115 --log-dir results/local \
+  --guesser-config guess_configs/local_low.json \
+  --baseline-config historical_trajectories/gpt-4o-retail.json
+```
+
+### Compare actor and speculator tool calls
+
+```bash
+ACTOR_JSON="results/actor-results.json"
+SPECULATOR_JSON="results/speculator-results.json"
+```
+
+```bash
+python compare_actor_speculator_tools.py \
+  --actor "$ACTOR_JSON" \
+  --speculator "$SPECULATOR_JSON" \
+  --actor-window next-response \
+  --show 20 \
+  --csv actor_vs_speculator.csv
+```
+
+```bash
+python compare_actor_speculator_tools.py \
+  --actor "$ACTOR_JSON" \
+  --speculator "$SPECULATOR_JSON" \
+  --compare-args \
+  --actor-window remainder \
+  --task-ids 2 4 6 \
+  --show 20 \
+  --csv actor_vs_speculator_args_remainder.csv
+```
+
+### Open the analysis notebook
+
+```bash
+jupyter lab analysis_static_combine.ipynb
+```
+
+### Inspect CLI options
+
+```bash
+python run.py --help
+```
+
+```bash
+python compare_actor_speculator_tools.py --help
+```

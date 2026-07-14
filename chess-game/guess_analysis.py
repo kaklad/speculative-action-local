@@ -21,6 +21,20 @@ from typing import List, Dict, Any, Optional
 CONFIDENCE_THRESHOLD = 50.0
 
 
+def numeric_value(value: Any) -> float:
+    """Return a numeric total for scalar or list-shaped telemetry values."""
+    if value is None:
+        return 0.0
+    if isinstance(value, (int, float)):
+        return float(value)
+    if isinstance(value, (list, tuple)):
+        return sum(numeric_value(item) for item in value)
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def load_step_info(file_path: str) -> Dict[str, Any]:
     with open(file_path, "r") as f:
         return json.load(f)
@@ -63,9 +77,11 @@ def analyze_with_truncation(step_info: Dict[str, Any], target_steps: int, with_c
     result_num_predictions = num_predictions
 
     for step in range(target_steps - 1):
-        time_checker_regular += steps[step]["time_taken_current_agent"]
-        token_checker_regular += steps[step]["total_tokens_current_agent"]
-        token_checker_speculate += steps[step]["total_tokens_current_agent"]
+        current_time = numeric_value(steps[step].get("time_taken_current_agent"))
+        current_tokens = numeric_value(steps[step].get("total_tokens_current_agent"))
+        time_checker_regular += current_time
+        token_checker_regular += current_tokens
+        token_checker_speculate += current_tokens
 
         if with_confidence:
             guessed_and_gt = steps[step].get("guessed_moves + ground_truth_move", steps[step].get("guessed_moves", []))
@@ -90,15 +106,19 @@ def analyze_with_truncation(step_info: Dict[str, Any], target_steps: int, with_c
             speculative_window_match_counter += 1
             num_speculative_window += 1
 
-            spec_time = steps[step]["guess_prediction_time"] + steps[step + 1]["time_taken_current_agent"]
-            spec_tokens = steps[step]["guess_total_tokens"] + steps[step + 1]["total_tokens_current_agent"]
+            spec_time = numeric_value(steps[step].get("guess_prediction_time")) + numeric_value(
+                steps[step + 1].get("time_taken_current_agent")
+            )
+            spec_tokens = numeric_value(steps[step].get("guess_total_tokens")) + numeric_value(
+                steps[step + 1].get("total_tokens_current_agent")
+            )
 
-            if spec_time < steps[step]["time_taken_current_agent"]:
-                time_checker_speculate += steps[step]["time_taken_current_agent"]
+            if spec_time < current_time:
+                time_checker_speculate += current_time
                 token_checker_speculate += num_predictions_step * spec_tokens
             else:
                 time_checker_speculate += spec_time
-                token_checker_speculate += (num_predictions_step - 1) * steps[step]["total_tokens_current_agent"] + spec_tokens
+                token_checker_speculate += (num_predictions_step - 1) * current_tokens + spec_tokens
 
         elif prev_match:
             prev_match = False
@@ -106,15 +126,17 @@ def analyze_with_truncation(step_info: Dict[str, Any], target_steps: int, with_c
                 match_counter += 1
         else:
             num_speculative_window += 1
-            time_checker_speculate += steps[step]["time_taken_current_agent"]
-            token_checker_speculate += num_predictions_step * steps[step]["total_tokens_current_agent"]
+            time_checker_speculate += current_time
+            token_checker_speculate += num_predictions_step * current_tokens
 
-    time_checker_regular += steps[target_steps - 1]["time_taken_current_agent"]
-    token_checker_regular += steps[target_steps - 1]["total_tokens_current_agent"]
-    token_checker_speculate += steps[target_steps - 1]["total_tokens_current_agent"]
+    last_time = numeric_value(steps[target_steps - 1].get("time_taken_current_agent"))
+    last_tokens = numeric_value(steps[target_steps - 1].get("total_tokens_current_agent"))
+    time_checker_regular += last_time
+    token_checker_regular += last_tokens
+    token_checker_speculate += last_tokens
     if not prev_match:
-        time_checker_speculate += steps[target_steps - 1]["time_taken_current_agent"]
-        token_checker_speculate += steps[target_steps - 1]["total_tokens_current_agent"]
+        time_checker_speculate += last_time
+        token_checker_speculate += last_tokens
 
     time_saved_percentage = ((time_checker_regular - time_checker_speculate) / time_checker_regular * 100) if time_checker_regular > 0 else 0
     tokens_wasted_percentage = ((token_checker_regular - token_checker_speculate) / token_checker_regular * 100) if token_checker_regular > 0 else 0

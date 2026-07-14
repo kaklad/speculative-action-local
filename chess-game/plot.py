@@ -167,7 +167,7 @@ def create_time_token_plot(base_path: str, with_confidence: bool = False) -> Non
 
     out_path = f"{base_path}/plot_with_confidence.pdf" if with_confidence else f"{base_path}/plot.pdf"
     plt.savefig(out_path, bbox_inches="tight")
-    plt.show()
+    plt.close(fig)
 
 
 def main_time_token(args) -> None:
@@ -353,7 +353,7 @@ def create_combined_bar_plots(base_directories, target_steps=[30, 50], output_pa
         plt.savefig(output_path, bbox_inches='tight', dpi=300)
         print(f"\nPlot saved to: {output_path}")
 
-    plt.show()
+    plt.close(fig)
 
 
 def main_bars(args) -> None:

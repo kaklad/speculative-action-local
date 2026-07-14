@@ -41,9 +41,15 @@ hotpotqa/
 
 ### 1. Install dependencies
 
+Use Python 3.10 or newer (the tested local environment uses Python 3.13):
+
 ```bash
-pip install -r requirements.txt
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
+
+The project environment contains the HotPotQA workflow dependencies. Install and run vLLM in a separate serving environment appropriate for your CUDA/PyTorch setup; `requirements.txt` does not install vLLM.
 
 ### 2. Start local model servers
 
@@ -57,11 +63,11 @@ This local setup assumes the Hugging Face models have already been downloaded un
 Run one OpenAI-compatible server for the main QA agent and one for the faster speculator:
 
 ```bash
-vllm serve ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
-vllm serve ../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3-4B-Instruct --served-model-name ../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` endpoints on the same ports. No OpenRouter, Gemini, or OpenAI API keys are required for the default local workflow.
@@ -71,7 +77,7 @@ SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` 
 ### Launch a run
 
 ```bash
-python run.py
+python run.py --samples 20 --steps 8 --num-guesses 3
 ```
 
 This evaluates the agent on HotPotQA questions with speculative simulation active. Trajectories, observations, and per-sample metrics land in `run_metrics/`.
@@ -79,40 +85,40 @@ This evaluates the agent on HotPotQA questions with speculative simulation activ
 You can swap models on the fly:
 
 ```bash
-python run.py --modelname "../models/Qwen/Qwen3.6-35B-A3B" --guessmodelname "../models/Qwen/Qwen3-4B-Instruct"
+python run.py --modelname "../models/Qwen/Qwen3.6-35B-A3B" --guessmodelname "../models/Qwen/Qwen3-4B-Instruct" --samples 20 --steps 8 --num-guesses 3
 ```
 
-Pass `--norun` to skip execution and only post-process existing results. Pass `--noprint` for silent mode.
+Pass `--no-run` to skip execution and only post-process existing results. `--norun` remains as a compatibility alias. Likewise, use `--no-print` (or `--noprint`) for silent generation. Use `--metrics-dir` to analyze a trajectory directory explicitly and `--output-dir` to select where aggregate metrics and graph images are written.
 
 ### Compute metrics
 
 ```bash
-# Aggregate accuracy across every agent/speculator pair
-python run.py --norun --getmetric --savemetrics
+# Aggregate accuracy for the selected agent/speculator pair
+python run.py --no-run --getmetric --savemetrics --num-guesses 3
 
 # Per-sample top-1 and top-3 accuracy lists
-python run.py --norun --getmetric2 --savemetrics
+python run.py --no-run --getmetric2 --savemetrics --num-guesses 3
 ```
 
 ### Plot results
 
 ```bash
 # Wall-clock time comparison: normal API vs speculative
-python run.py --norun --graph
+python run.py --no-run --graph --num-guesses 3
 
 # Top-1 vs top-3 prediction accuracy per speculator
-python run.py --norun --graph3
+python run.py --no-run --graph3 --num-guesses 3
 ```
 
 ## Hyperparameters
 
-Adjustable in `src/constants.py`:
+Defaults are defined in `src/constants.py`; the main run controls also have CLI overrides:
 
 | Parameter | Default | Description |
 |---|---|---|
-| `n_samples_to_run` | 20 | Questions to evaluate per run |
-| `n_steps_to_run` | 8 | Max reasoning steps per question |
-| `guess_num_actions` | 3 | Top-k speculative candidates |
+| `n_samples_to_run` | 20 | Questions to evaluate per run (`--samples`) |
+| `n_steps_to_run` | 8 | Max reasoning steps per question (`--steps`) |
+| `guess_num_actions` | 3 | Top-k speculative candidates (`--num-guesses`) |
 | `temperature` | 1 | Agent sampling temperature |
 | `guess_temperature` | 0.1 | Speculator sampling temperature |
 | `max_agent_retries` | 1 | Agent retries on malformed output |
@@ -121,3 +127,108 @@ Adjustable in `src/constants.py`:
 ## Sample Data
 
 A curated set of trajectories and metrics is included under `run_metrics/` and `trajs/` to illustrate the output format across different agent/speculator model pairings.
+
+## CLI command reference
+
+Run these commands from `speculative-action-local/hotpotqa/`.
+
+### Environment
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+```
+
+### Local model servers
+
+Run each server in its own terminal from a vLLM-capable serving environment. The explicit served names match the model identifiers used by the Python client.
+
+```bash
+vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+```
+
+```bash
+vllm serve ../models/Qwen/Qwen3-4B-Instruct --served-model-name ../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+```
+
+Optional endpoint checks:
+
+```bash
+curl http://localhost:8000/v1/models
+curl http://localhost:8001/v1/models
+```
+
+### Run experiments
+
+```bash
+python run.py --samples 20 --steps 8 --num-guesses 3
+```
+
+```bash
+python run.py --no-print --samples 20 --steps 8 --num-guesses 3
+```
+
+```bash
+python run.py --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --samples 20 --steps 8 --num-guesses 3
+```
+
+Environment-variable endpoint overrides:
+
+```bash
+LOCAL_MAIN_BASE_URL=http://localhost:8000/v1 LOCAL_GUESS_BASE_URL=http://localhost:8001/v1 python run.py --samples 20 --steps 8 --num-guesses 3
+```
+
+### Clean incomplete trajectories
+
+```bash
+python run.py --no-run --cleanuptrajs
+```
+
+```bash
+python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3-4B-Instruct
+```
+
+### Compute and save metrics
+
+Use the model arguments so the derived trajectory path matches the generation run:
+
+```bash
+python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --num-guesses 3 --getmetric --savemetrics
+```
+
+```bash
+python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --num-guesses 3 --getmetric2 --savemetrics
+```
+
+Analyze an explicit trajectory directory and write aggregate files elsewhere:
+
+```bash
+python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --num-guesses 3 --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3-4B-Instruct --output-dir ./run_metrics/local_summary --getmetric --getmetric2 --savemetrics
+```
+
+### Plot saved metrics
+
+```bash
+python run.py --no-run --num-guesses 3 --graph
+```
+
+```bash
+python run.py --no-run --num-guesses 3 --graph3
+```
+
+For a custom aggregate output directory:
+
+```bash
+python run.py --no-run --num-guesses 3 --output-dir ./run_metrics/local_summary --graph
+```
+
+```bash
+python run.py --no-run --num-guesses 3 --output-dir ./run_metrics/local_summary --graph3
+```
+
+### Inspect CLI options
+
+```bash
+python run.py --help
+```

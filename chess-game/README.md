@@ -56,7 +56,8 @@ chess-game/                          # ← run all commands from here
 ```bash
 uv sync
 ```
-(Or: `uv venv .venv`, `source .venv/bin/activate`, then `uv add -r requirements.txt`.)
+
+The project environment contains the chess workflow dependencies. Install and run vLLM in a separate serving environment appropriate for your CUDA/PyTorch setup; `uv sync` does not install vLLM.
 
 ### 2. Start local model servers
 
@@ -70,11 +71,11 @@ This local setup assumes the Hugging Face models have already been downloaded un
 Run one OpenAI-compatible server for the main chess-playing model and one for the faster guess model:
 
 ```bash
-vllm serve ./models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ./models/Qwen/Qwen3.6-35B-A3B --served-model-name models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
-vllm serve ./models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ./models/Qwen/Qwen3-4B-Instruct --served-model-name models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` endpoints on the same ports.
@@ -127,12 +128,12 @@ Output goes under `./trajectories/` (or `Spec_Chess_Trajs/` depending on config)
 Then format the trajectory for analysis:
 
 ```bash
-uv run speculative_workflow/guess_over_spec_traj.py --base-dir "path/to/model_vs_model_runs"
+uv run speculative_workflow/guess_over_spec_traj.py --base-dir ./trajectories/test_trajectories
 ```
 
-Here, `"path/to/model_vs_model_runs"` should be a directory containing subfolders—one for each model-vs-model run. This script will create a `steps_info_{model_name}_guess_{num_guesses}.json` file inside each run's subfolder.
+`--base-dir` processes every immediate subdirectory containing `stepsinfo.json`. To process one run only, use `--stepsinfo ./trajectories/test_trajectories/${RUN_ID}/stepsinfo.json`. The script creates `steps_info_{model_name}_guess_{num_guesses}.json` beside each input file.
 
-**Note:** In the speculative pipeline there is no speculative window after a prediction hit. Use `-add_spec=True` with `guess_over_spec_traj.py` to add speculative predictions for those windows too (for accuracy estimation).
+**Note:** In the speculative pipeline there is no speculative window after a prediction hit. Use `--add-spec` with `guess_over_spec_traj.py` to add speculative predictions for those windows too (for accuracy estimation).
 
 
 ### Workflow 2 (Alternative): Regular trajectory method
@@ -148,17 +149,17 @@ This creates a trajectory under `./trajectories/` with `stepsinfo.json`, `reward
 #### Step 2: Add speculative predictions
 
 ```bash
-uv run regular_workflow/guess_over_regular_traj.py
+uv run regular_workflow/guess_over_regular_traj.py --base-dir ./trajectories/test_trajectories
 ```
 
-Optionally pass a path to a trajectory directory or `stepsinfo.json`. This produces `steps_info_{model_name}_guess_{num_guesses}.json` in the same directory.
+Use `--base-dir` for all immediate run subdirectories, or `--stepsinfo/-i` for one trajectory directory or `stepsinfo.json`. This produces `steps_info_{model_name}_guess_{num_guesses}.json` in the same directory.
 
 ## Analyze results
 
-From `chess-game/`, run analysis on trajectory directories (default: `./trajectories/sample_trajectories` if no argument, or pass a base path that contains per-run subdirs):
+From `chess-game/`, run analysis on a base path containing per-run subdirectories. Without `--base-dir`, the command uses `paths.trajectories` from `config.yml`:
 
 ```bash
-uv run guess_analysis.py [base_directory]
+uv run guess_analysis.py --base-dir ./trajectories/test_trajectories
 ```
 
 This reports:
@@ -205,15 +206,15 @@ To try the confidence-aware selective branching policy from the paper:
 
 1. Add confidence estimates to a step file (`steps_info_*_guess_*.json`):
    ```bash
-   uv run confidence-prediction.py
+   uv run confidence-prediction.py --input ./trajectories/test_trajectories/${RUN_ID}/steps_info_Qwen_Qwen3_4B_Instruct_guess_3.json
    ```
 2. Run analysis with the `--confidence` flag (uses `steps_info*_confidence_prediction.json`, filters guesses by confidence > 50):
    ```bash
-   uv run guess_analysis.py --confidence
+   uv run guess_analysis.py --base-dir ./trajectories/test_trajectories --confidence
    ```
 3. Visualize (time vs tokens with confidence policy overlay):
    ```bash
-   uv run plot.py time-token --confidence
+   uv run plot.py time-token --base-dir ./trajectories/test_trajectories --confidence
    ```
 
 
@@ -251,7 +252,7 @@ Paths are relative to `chess-game/` when you run from this directory:
 
 ```yaml
 paths:
-  trajectories: "./trajectories"
+  trajectories: "./trajectories/test_trajectories"
   sample_trajectories: "./trajectories/sample_trajectories"
 ```
 
@@ -270,7 +271,115 @@ game:
 `./trajectories/sample_trajectories/` contains example runs. Each subdirectory is one game with analysis files (e.g. different numbers of speculative predictions). 
 
 
+
+
+
+
 ## local server
 
-vllm serve ./models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
-vllm serve ./models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ./models/Qwen/Qwen3.6-35B-A3B --served-model-name models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ./models/Qwen/Qwen3-4B-Instruct --served-model-name models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+
+## CLI command reference
+
+Run these commands from `speculative-action-local/chess-game/`.
+
+### Environment
+
+```bash
+uv sync
+```
+
+### Local model servers
+
+Run each server in its own terminal from a vLLM-capable serving environment:
+
+```bash
+vllm serve ./models/Qwen/Qwen3.6-35B-A3B --served-model-name models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+```
+
+```bash
+vllm serve ./models/Qwen/Qwen3-4B-Instruct --served-model-name models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+```
+
+### Speculative workflow
+
+For commands that target one generated run, set its directory name first:
+
+```bash
+RUN_ID="replace-with-run-directory-name"
+```
+
+```bash
+uv run speculative-chess
+```
+
+```bash
+uv run speculative-chess --stop-after 10 --trajectories-dir ./trajectories/test_trajectories
+```
+
+```bash
+uv run speculative_workflow/guess_over_spec_traj.py --base-dir ./trajectories/test_trajectories
+```
+
+```bash
+uv run speculative_workflow/guess_over_spec_traj.py --base-dir ./trajectories/test_trajectories --add-spec
+```
+
+```bash
+uv run speculative_workflow/guess_over_spec_traj.py --stepsinfo ./trajectories/test_trajectories/${RUN_ID}/stepsinfo.json --add-spec
+```
+
+### Regular workflow
+
+```bash
+uv run regular-chess
+```
+
+```bash
+uv run regular-chess --stop-after 10 --trajectories-dir ./trajectories/test_trajectories
+```
+
+```bash
+uv run regular_workflow/guess_over_regular_traj.py --base-dir ./trajectories/test_trajectories
+```
+
+```bash
+uv run regular_workflow/guess_over_regular_traj.py --stepsinfo ./trajectories/test_trajectories/${RUN_ID}/stepsinfo.json
+```
+
+### Analysis
+
+```bash
+uv run guess_analysis.py --base-dir ./trajectories/test_trajectories
+```
+
+```bash
+uv run confidence-prediction.py --input ./trajectories/test_trajectories/${RUN_ID}/steps_info_Qwen_Qwen3_4B_Instruct_guess_3.json
+```
+
+```bash
+uv run guess_analysis.py --base-dir ./trajectories/test_trajectories --confidence
+```
+
+### Visualization
+
+```bash
+uv run plot.py time-token --base-dir ./trajectories/test_trajectories
+```
+
+```bash
+uv run plot.py time-token --base-dir ./trajectories/test_trajectories --confidence
+```
+
+```bash
+uv run plot.py bars --root-path ./trajectories/test_trajectories
+```
+
+```bash
+uv run plot.py bars --root-path ./trajectories/test_trajectories --target-steps 20 30 40 50 --speculative-accuracy
+```
+
+```bash
+uv run plot.py bars --root-path ./trajectories/test_trajectories --output ./trajectories/test_trajectories/combined_bar_plots.pdf
+```

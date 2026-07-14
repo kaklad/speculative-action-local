@@ -16,6 +16,9 @@ class Utils:
 
     @staticmethod
     def save_json(obj, path, delete_prev_file=False):
+        directory = os.path.dirname(path)
+        if directory:
+            os.makedirs(directory, exist_ok=True)
         if os.path.exists(path) and delete_prev_file:
             os.remove(path)
         with open(path, "w") as f:
@@ -126,6 +129,9 @@ class Utils:
 
     @staticmethod
     def cleanup_trajs(trajs_folder):
+        if not os.path.isdir(trajs_folder):
+            print(f"Trajectory directory not found: {trajs_folder}")
+            return
         for direc in os.listdir(trajs_folder):
             datapoint_path = os.path.join(trajs_folder, direc)
             if Utils.is_dirty_traj(datapoint_path):

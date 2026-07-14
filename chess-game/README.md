@@ -64,14 +64,14 @@ The project environment contains the chess workflow dependencies. Install and ru
 This local setup assumes the Hugging Face models have already been downloaded under `./models/`:
 
 ```text
-../models/Qwen/Qwen3.6-35B-A3B
+../models/Qwen/Qwen3-14B
 ../models/Qwen/Qwen3.5-4B
 ```
 
 Run one OpenAI-compatible server for the main chess-playing model and one for the faster guess model:
 
 ```bash
-vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3-14B --served-model-name ../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
@@ -97,7 +97,7 @@ api:
 models:
   local:
     root: "../models"
-    main: "Qwen/Qwen3.6-35B-A3B"       # Resolved as ../models/Qwen/Qwen3.6-35B-A3B
+    main: "Qwen/Qwen3-14B"       # Resolved as ../models/Qwen/Qwen3-14B
     guess: "Qwen/Qwen3.5-4B"    # Resolved as ../models/Qwen/Qwen3.5-4B
 
 game:
@@ -277,7 +277,7 @@ game:
 
 ## local server
 
-vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3-14B --served-model-name ../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
 vllm serve ../models/Qwen/Qwen3.5-4B --served-model-name ../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 
 ## CLI command reference
@@ -295,7 +295,7 @@ uv sync
 Run each server in its own terminal from a vLLM-capable serving environment:
 
 ```bash
-vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3-14B --served-model-name ../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash

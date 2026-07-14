@@ -56,14 +56,14 @@ The project environment contains the HotPotQA workflow dependencies. Install and
 This local setup assumes the Hugging Face models have already been downloaded under `../models/`:
 
 ```text
-../models/Qwen/Qwen3.6-35B-A3B
+../models/Qwen/Qwen3-14B
 ../models/Qwen/Qwen3.5-4B
 ```
 
 Run one OpenAI-compatible server for the main QA agent and one for the faster speculator:
 
 ```bash
-vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3-14B --served-model-name ../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
@@ -85,7 +85,7 @@ This evaluates the agent on HotPotQA questions with speculative simulation activ
 You can swap models on the fly:
 
 ```bash
-python run.py --modelname "../models/Qwen/Qwen3.6-35B-A3B" --guessmodelname "../models/Qwen/Qwen3.5-4B" --samples 20 --steps 8 --num-guesses 3
+python run.py --modelname "../models/Qwen/Qwen3-14B" --guessmodelname "../models/Qwen/Qwen3.5-4B" --samples 20 --steps 8 --num-guesses 3
 ```
 
 Pass `--no-run` to skip execution and only post-process existing results. `--norun` remains as a compatibility alias. Likewise, use `--no-print` (or `--noprint`) for silent generation. Use `--metrics-dir` to analyze a trajectory directory explicitly and `--output-dir` to select where aggregate metrics and graph images are written.
@@ -145,7 +145,7 @@ python -m pip install -r requirements.txt
 Run each server in its own terminal from a vLLM-capable serving environment. The explicit served names match the model identifiers used by the Python client.
 
 ```bash
-vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3-14B --served-model-name ../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
@@ -170,7 +170,7 @@ python run.py --no-print --samples 20 --steps 8 --num-guesses 3
 ```
 
 ```bash
-python run.py --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --samples 20 --steps 8 --num-guesses 3
+python run.py --modelname ../models/Qwen/Qwen3-14B --guessmodelname ../models/Qwen/Qwen3.5-4B --samples 20 --steps 8 --num-guesses 3
 ```
 
 Environment-variable endpoint overrides:
@@ -186,7 +186,7 @@ python run.py --no-run --cleanuptrajs
 ```
 
 ```bash
-python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3.5-4B
+python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3-14B_top3/trajs_Qwen3.5-4B
 ```
 
 ### Compute and save metrics
@@ -194,17 +194,17 @@ python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3.6-
 Use the model arguments so the derived trajectory path matches the generation run:
 
 ```bash
-python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --getmetric --savemetrics
+python run.py --no-run --modelname ../models/Qwen/Qwen3-14B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --getmetric --savemetrics
 ```
 
 ```bash
-python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --getmetric2 --savemetrics
+python run.py --no-run --modelname ../models/Qwen/Qwen3-14B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --getmetric2 --savemetrics
 ```
 
 Analyze an explicit trajectory directory and write aggregate files elsewhere:
 
 ```bash
-python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3.5-4B --output-dir ./run_metrics/local_summary --getmetric --getmetric2 --savemetrics
+python run.py --no-run --modelname ../models/Qwen/Qwen3-14B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --metrics-dir ./run_metrics/agent_Qwen3-14B_top3/trajs_Qwen3.5-4B --output-dir ./run_metrics/local_summary --getmetric --getmetric2 --savemetrics
 ```
 
 ### Plot saved metrics

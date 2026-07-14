@@ -14,7 +14,7 @@ models:
     guess: "gpt-5-2025-08-07"  # Smaller model for guess prediction
   local:
     root: "../models"
-    main: "Qwen/Qwen3.6-35B-A3B"  # Resolved as ../models/Qwen/Qwen3.6-35B-A3B
+    main: "Qwen/Qwen3-14B"  # Resolved as ../models/Qwen/Qwen3-14B
     guess: "Qwen/Qwen3.5-4B"  # Resolved as ../models/Qwen/Qwen3.5-4B
 
 # Game Configuration

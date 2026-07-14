@@ -5,7 +5,7 @@ openai_api_key = ""
 local_api_key = "EMPTY"
 local_main_base_url = "http://localhost:8000/v1"
 local_guess_base_url = "http://localhost:8001/v1"
-local_model_name = "../models/Qwen/Qwen3.6-35B-A3B"
+local_model_name = "../models/Qwen/Qwen3-14B"
 local_guess_model_name = "../models/Qwen/Qwen3.5-4B"
 
 openrouter_model_name = local_model_name

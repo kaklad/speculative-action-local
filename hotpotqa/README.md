@@ -57,7 +57,7 @@ This local setup assumes the Hugging Face models have already been downloaded un
 
 ```text
 ../models/Qwen/Qwen3.6-35B-A3B
-../models/Qwen/Qwen3-4B-Instruct
+../models/Qwen/Qwen3.5-4B
 ```
 
 Run one OpenAI-compatible server for the main QA agent and one for the faster speculator:
@@ -67,7 +67,7 @@ vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwe
 ```
 
 ```bash
-vllm serve ../models/Qwen/Qwen3-4B-Instruct --served-model-name ../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.5-4B --served-model-name ../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` endpoints on the same ports. No OpenRouter, Gemini, or OpenAI API keys are required for the default local workflow.
@@ -85,7 +85,7 @@ This evaluates the agent on HotPotQA questions with speculative simulation activ
 You can swap models on the fly:
 
 ```bash
-python run.py --modelname "../models/Qwen/Qwen3.6-35B-A3B" --guessmodelname "../models/Qwen/Qwen3-4B-Instruct" --samples 20 --steps 8 --num-guesses 3
+python run.py --modelname "../models/Qwen/Qwen3.6-35B-A3B" --guessmodelname "../models/Qwen/Qwen3.5-4B" --samples 20 --steps 8 --num-guesses 3
 ```
 
 Pass `--no-run` to skip execution and only post-process existing results. `--norun` remains as a compatibility alias. Likewise, use `--no-print` (or `--noprint`) for silent generation. Use `--metrics-dir` to analyze a trajectory directory explicitly and `--output-dir` to select where aggregate metrics and graph images are written.
@@ -149,7 +149,7 @@ vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwe
 ```
 
 ```bash
-vllm serve ../models/Qwen/Qwen3-4B-Instruct --served-model-name ../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.5-4B --served-model-name ../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 Optional endpoint checks:
@@ -170,7 +170,7 @@ python run.py --no-print --samples 20 --steps 8 --num-guesses 3
 ```
 
 ```bash
-python run.py --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --samples 20 --steps 8 --num-guesses 3
+python run.py --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --samples 20 --steps 8 --num-guesses 3
 ```
 
 Environment-variable endpoint overrides:
@@ -186,7 +186,7 @@ python run.py --no-run --cleanuptrajs
 ```
 
 ```bash
-python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3-4B-Instruct
+python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3.5-4B
 ```
 
 ### Compute and save metrics
@@ -194,17 +194,17 @@ python run.py --no-run --cleanuptrajs --metrics-dir ./run_metrics/agent_Qwen3.6-
 Use the model arguments so the derived trajectory path matches the generation run:
 
 ```bash
-python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --num-guesses 3 --getmetric --savemetrics
+python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --getmetric --savemetrics
 ```
 
 ```bash
-python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --num-guesses 3 --getmetric2 --savemetrics
+python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --getmetric2 --savemetrics
 ```
 
 Analyze an explicit trajectory directory and write aggregate files elsewhere:
 
 ```bash
-python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3-4B-Instruct --num-guesses 3 --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3-4B-Instruct --output-dir ./run_metrics/local_summary --getmetric --getmetric2 --savemetrics
+python run.py --no-run --modelname ../models/Qwen/Qwen3.6-35B-A3B --guessmodelname ../models/Qwen/Qwen3.5-4B --num-guesses 3 --metrics-dir ./run_metrics/agent_Qwen3.6-35B-A3B_top3/trajs_Qwen3.5-4B --output-dir ./run_metrics/local_summary --getmetric --getmetric2 --savemetrics
 ```
 
 ### Plot saved metrics

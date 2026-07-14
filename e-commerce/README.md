@@ -11,8 +11,8 @@ pip install -e .
 
 ```text
 ../../models/Qwen/Qwen3.6-35B-A3B
-../../models/Qwen/Qwen3-4B-Instruct
-../../models/Qwen/Qwen3-14B-Instruct
+../../models/Qwen/Qwen3.5-4B
+../../models/Qwen/Qwen3-14B
 ```
 
 Run the main agent/user model:
@@ -24,13 +24,13 @@ vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-mo
 Run the fast guess model:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 Run the medium guess model:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3-14B-Instruct --host 0.0.0.0 --port 8002 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8002 --max-model-len 8192
 ```
 
 SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` endpoints on the same ports. No OpenAI / Anthropic / Google / Mistral API keys are required for the local workflow.
@@ -77,11 +77,11 @@ vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../../models/Qw
 ```
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3-4B-Instruct --served-model-name ../../models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.5-4B --served-model-name ../../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3-14B-Instruct --served-model-name ../../models/Qwen/Qwen3-14B-Instruct --host 0.0.0.0 --port 8002 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3-14B --served-model-name ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8002 --max-model-len 8192
 ```
 
 ```bash

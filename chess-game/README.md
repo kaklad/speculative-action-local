@@ -64,18 +64,18 @@ The project environment contains the chess workflow dependencies. Install and ru
 This local setup assumes the Hugging Face models have already been downloaded under `./models/`:
 
 ```text
-./models/Qwen/Qwen3.6-35B-A3B
-./models/Qwen/Qwen3-4B-Instruct
+../models/Qwen/Qwen3.6-35B-A3B
+../models/Qwen/Qwen3.5-4B
 ```
 
 Run one OpenAI-compatible server for the main chess-playing model and one for the faster guess model:
 
 ```bash
-vllm serve ./models/Qwen/Qwen3.6-35B-A3B --served-model-name models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
-vllm serve ./models/Qwen/Qwen3-4B-Instruct --served-model-name models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.5-4B --served-model-name ../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` endpoints on the same ports.
@@ -96,16 +96,16 @@ api:
 
 models:
   local:
-    root: "./models"
-    main: "Qwen/Qwen3.6-35B-A3B"       # Resolved as ./models/Qwen/Qwen3.6-35B-A3B
-    guess: "Qwen/Qwen3-4B-Instruct"    # Resolved as ./models/Qwen/Qwen3-4B-Instruct
+    root: "../models"
+    main: "Qwen/Qwen3.6-35B-A3B"       # Resolved as ../models/Qwen/Qwen3.6-35B-A3B
+    guess: "Qwen/Qwen3.5-4B"    # Resolved as ../models/Qwen/Qwen3.5-4B
 
 game:
   agent_name0: "Local"
   agent_name1: "Local"
 
 guess:
-  model_name: "Qwen/Qwen3-4B-Instruct"
+  model_name: "Qwen/Qwen3.5-4B"
   provider: "local"
 ```
 
@@ -206,7 +206,7 @@ To try the confidence-aware selective branching policy from the paper:
 
 1. Add confidence estimates to a step file (`steps_info_*_guess_*.json`):
    ```bash
-   uv run confidence-prediction.py --input ./trajectories/test_trajectories/${RUN_ID}/steps_info_Qwen_Qwen3_4B_Instruct_guess_3.json
+   uv run confidence-prediction.py --input ./trajectories/test_trajectories/${RUN_ID}/steps_info_Qwen_Qwen3_5_4B_guess_3.json
    ```
 2. Run analysis with the `--confidence` flag (uses `steps_info*_confidence_prediction.json`, filters guesses by confidence > 50):
    ```bash
@@ -235,7 +235,7 @@ game:
 
 ```yaml
 guess:
-  model_name: "Qwen/Qwen3-4B-Instruct"  # Faster model for speculation
+  model_name: "Qwen/Qwen3.5-4B"  # Faster model for speculation
   provider: "local"
 ```
 
@@ -277,8 +277,8 @@ game:
 
 ## local server
 
-vllm serve ./models/Qwen/Qwen3.6-35B-A3B --served-model-name models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
-vllm serve ./models/Qwen/Qwen3-4B-Instruct --served-model-name models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.5-4B --served-model-name ../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 
 ## CLI command reference
 
@@ -295,11 +295,11 @@ uv sync
 Run each server in its own terminal from a vLLM-capable serving environment:
 
 ```bash
-vllm serve ./models/Qwen/Qwen3.6-35B-A3B --served-model-name models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
-vllm serve ./models/Qwen/Qwen3-4B-Instruct --served-model-name models/Qwen/Qwen3-4B-Instruct --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../models/Qwen/Qwen3.5-4B --served-model-name ../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 ### Speculative workflow
@@ -355,7 +355,7 @@ uv run guess_analysis.py --base-dir ./trajectories/test_trajectories
 ```
 
 ```bash
-uv run confidence-prediction.py --input ./trajectories/test_trajectories/${RUN_ID}/steps_info_Qwen_Qwen3_4B_Instruct_guess_3.json
+uv run confidence-prediction.py --input ./trajectories/test_trajectories/${RUN_ID}/steps_info_Qwen_Qwen3_5_4B_guess_3.json
 ```
 
 ```bash

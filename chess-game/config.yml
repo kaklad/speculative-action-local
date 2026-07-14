@@ -13,9 +13,9 @@ models:
     main: "gpt-5-2025-08-07"  # Main model for game playing
     guess: "gpt-5-2025-08-07"  # Smaller model for guess prediction
   local:
-    root: "./models"
-    main: "Qwen/Qwen3.6-35B-A3B"  # Resolved as ./models/Qwen/Qwen3.6-35B-A3B
-    guess: "Qwen/Qwen3-4B-Instruct"  # Resolved as ./models/Qwen/Qwen3-4B-Instruct
+    root: "../models"
+    main: "Qwen/Qwen3.6-35B-A3B"  # Resolved as ../models/Qwen/Qwen3.6-35B-A3B
+    guess: "Qwen/Qwen3.5-4B"  # Resolved as ../models/Qwen/Qwen3.5-4B
 
 # Game Configuration
 game:
@@ -29,7 +29,7 @@ game:
 # Guess Model Configuration
 # This is the smaller/faster model used for predicting opponent moves
 guess:
-  model_name: "Qwen/Qwen3-4B-Instruct"  # Model for speculation/guess predictions
+  model_name: "Qwen/Qwen3.5-4B"  # Model for speculation/guess predictions
   provider: "local"  # Options: "local" or "openai"
 
 # Path Configuration

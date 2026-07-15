@@ -53,7 +53,7 @@ pip install -e .
 3. For the local workflow in this repository, start OpenAI-compatible model servers instead of setting API keys:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3.5-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 vllm serve ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 

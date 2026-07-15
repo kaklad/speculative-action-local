@@ -53,8 +53,11 @@ pip install -e .
 3. For the local workflow in this repository, start OpenAI-compatible model servers instead of setting API keys:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192 --enable-auto-tool-choice --tool-call-parser hermes --reasoning-parser qwen3
-vllm serve ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3
+vllm serve ../../models/Qwen/Qwen3.5-9B --host 0.0.0.0 --port 8001 \
+  --max-model-len 131072 --max-num-seqs 2 \
+  --enable-auto-tool-choice --tool-call-parser qwen3_coder \
+  --reasoning-parser qwen3 --language-model-only
 ```
 
 No OpenAI / Anthropic / Google / Mistral / AnyScale API keys are required when using `--model-provider local`.

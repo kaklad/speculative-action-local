@@ -1,7 +1,7 @@
 {
     "type": "single",
     "model": {
-        "model": "../../models/Qwen/Qwen3-14B",
+        "model": "../../models/Qwen/Qwen3.5-9B",
         "provider": "local",
         "base_url": "http://localhost:8001/v1",
         "temperature": 1,

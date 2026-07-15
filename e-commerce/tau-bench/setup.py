@@ -20,5 +20,6 @@ setup(
         "litellm>=1.41.0",
         "fastapi>=0.115.0",
         "orjson>=3.10.0",
+        "transformers>=4.51.0",
     ],
 )

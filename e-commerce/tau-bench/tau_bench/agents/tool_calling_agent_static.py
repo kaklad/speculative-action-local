@@ -2,6 +2,7 @@
 
 import json
 import copy
+import re
 import time
 from typing import List, Optional, Dict, Any
 from concurrent.futures import ThreadPoolExecutor, Future
@@ -17,6 +18,29 @@ from tau_bench.model_utils.local import completion, output_tokens, reasoning_tok
 
 max_num_steps = 5
 background_agent_type = "guesser" # oracle, guesser, preparer
+
+
+def _extract_reasoning_content(response: Any) -> Optional[str]:
+    message = response.choices[0].message
+    for field in ("reasoning_content", "reasoning"):
+        value = getattr(message, field, None)
+        if value:
+            return str(value)
+
+    provider_fields = getattr(message, "provider_specific_fields", None) or {}
+    for field in ("reasoning_content", "reasoning"):
+        value = provider_fields.get(field)
+        if value:
+            return str(value)
+
+    content = getattr(message, "content", None) or ""
+    match = re.search(r"<think>(.*?)</think>", content, flags=re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    if "</think>" in content:
+        return content.split("</think>", 1)[0].removeprefix("<think>").strip()
+    return None
+
 
 class ToolCallingStaticAgent(Agent):
     def __init__(
@@ -50,6 +74,7 @@ class ToolCallingStaticAgent(Agent):
             "output": "",
             "input_token_length": 0,
             "output_token_length": 0,
+            "reasoning_content": None,
             "price_cost": 0,
             "model": guesser_model,
             "time": 0
@@ -70,6 +95,7 @@ class ToolCallingStaticAgent(Agent):
         guesser["output"] = res.choices[0].message.content
         guesser["input_token_length"] = res.usage.prompt_tokens
         guesser["reasoning_token_length"] = reasoning_tokens(res)
+        guesser["reasoning_content"] = _extract_reasoning_content(res)
         guesser["output_token_length"] = output_tokens(res)
         guesser["price_cost"] = response_cost(res)
         guesser["time"] = llm_duration
@@ -115,12 +141,14 @@ class ToolCallingStaticAgent(Agent):
             tool_end_time = time.time()
             tool_duration = tool_end_time - tool_start_time
             reasoning_token_length = reasoning_tokens(res)
+            reasoning_content = _extract_reasoning_content(res)
             if action.name != RESPOND_ACTION_NAME:
                 decider_log = {
                     "input": messages_copy,
                     "output": next_message,
                     "input_token_length": res.usage.prompt_tokens,
                     "reasoning_token_length": reasoning_token_length,
+                    "reasoning_content": reasoning_content,
                     "output_token_length": output_tokens(res),
                     "price_cost": response_cost(res),
                     "time": llm_duration,
@@ -151,6 +179,7 @@ class ToolCallingStaticAgent(Agent):
                     "output": next_message,
                     "input_token_length": res.usage.prompt_tokens,
                     "reasoning_token_length": reasoning_token_length,
+                    "reasoning_content": reasoning_content,
                     "output_token_length": output_tokens(res),
                     "price_cost": response_cost(res),
                     "time": llm_duration,

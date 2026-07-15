@@ -17,7 +17,7 @@ pip install -e .
 Run the main agent/user model:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192 --enable-auto-tool-choice --tool-call-parser hermes --reasoning-parser qwen3
 ```
 
 Run the fast guess model:
@@ -68,7 +68,7 @@ python -m pip install -e .
 ### Local model servers
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.6-35B-A3B --served-model-name ../../models/Qwen/Qwen3.6-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192 --enable-auto-tool-choice --tool-call-parser hermes --reasoning-parser qwen3
 ```
 
 ```bash

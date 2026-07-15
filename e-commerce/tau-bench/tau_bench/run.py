@@ -3,6 +3,7 @@
 import os
 import json
 import random
+import re
 import time
 import traceback
 from math import comb
@@ -19,6 +20,11 @@ from tau_bench.envs.user import UserStrategy
 from tau_bench.model_utils.local import LOCAL_PROVIDER
 
 
+def _safe_model_name(model: str) -> str:
+    model_name = os.path.basename(os.path.normpath(model))
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", model_name).strip("._") or "model"
+
+
 def run(config: RunConfig) -> List[EnvRunResult]:
     assert config.env in ["retail", "airline"], "Only retail and airline envs are supported"
     assert config.model_provider in provider_list or config.model_provider == LOCAL_PROVIDER, "Invalid model provider"
@@ -29,8 +35,13 @@ def run(config: RunConfig) -> List[EnvRunResult]:
 
     random.seed(config.seed)
     time_str = datetime.now().strftime("%m%d%H%M%S")
-    # ckpt_path = f"{config.log_dir}/{config.agent_strategy}-{config.model.split('/')[-1]}-{config.temperature}_range_{config.start_index}-{config.end_index}_user-{config.user_model}-{config.user_strategy}_{time_str}.json"
-    ckpt_path = f"{config.log_dir}/{config.guesser_config['model']['model']}_{config.guesser_config['model']['reasoning']}_{'check' if config.guesser_check else 'no_check'}_{config.start_index}-{config.end_index}_{time_str}.json"
+    guesser_model = _safe_model_name(config.guesser_config["model"]["model"])
+    ckpt_filename = (
+        f"{guesser_model}_{config.guesser_config['model']['reasoning']}_"
+        f"{'check' if config.guesser_check else 'no_check'}_"
+        f"{config.start_index}-{config.end_index}_{time_str}.json"
+    )
+    ckpt_path = os.path.join(config.log_dir, ckpt_filename)
     
     if not os.path.exists(config.log_dir):
         os.makedirs(config.log_dir)

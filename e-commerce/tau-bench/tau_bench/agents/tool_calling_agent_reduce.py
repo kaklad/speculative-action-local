@@ -85,7 +85,7 @@ class ToolCallingReduceAgent(Agent):
         }
         llm_start_time = time.time()
         res = completion(
-            messages=[{"role": "system", "content": user_query_prompt}],
+            messages=[{"role": "user", "content": user_query_prompt}],
             model=guesser_model["model"],
             custom_llm_provider=guesser_model["provider"],
             temperature=guesser_model["temperature"],
@@ -95,7 +95,7 @@ class ToolCallingReduceAgent(Agent):
         )
         llm_end_time = time.time()
         llm_duration = llm_end_time - llm_start_time
-        guesser["input"] = [{"role": "system", "content": user_query_prompt}]
+        guesser["input"] = [{"role": "user", "content": user_query_prompt}]
         guesser["output"] = res.choices[0].message.content
         guesser["input_token_length"] = res.usage.prompt_tokens
         guesser["reasoning_token_length"] = reasoning_tokens(res)

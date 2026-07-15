@@ -42,6 +42,12 @@ def _extract_reasoning_content(response: Any) -> Optional[str]:
     return None
 
 
+def _has_actionable_message(message: Any) -> bool:
+    tool_calls = getattr(message, "tool_calls", None)
+    content = getattr(message, "content", None)
+    return bool(tool_calls) or (isinstance(content, str) and bool(content.strip()))
+
+
 class ToolCallingStaticAgent(Agent):
     def __init__(
         self,
@@ -128,12 +134,34 @@ class ToolCallingStaticAgent(Agent):
                     import traceback
                     print(traceback.format_exc())
                     print(f"Decider failed with error: {e}")
-                if not res or not res.choices or not res.choices[0].message:
+                if (
+                    not res
+                    or not res.choices
+                    or not res.choices[0].message
+                    or not _has_actionable_message(res.choices[0].message)
+                ):
+                    if res and res.choices and res.choices[0].message:
+                        print(
+                            "Decider returned neither a tool call nor response "
+                            "content (finish_reason="
+                            f"{getattr(res.choices[0], 'finish_reason', None)}, "
+                            f"has_reasoning={bool(_extract_reasoning_content(res))}); retrying"
+                        )
                     num_retries += 1
                     continue
                 else:
                     break
-                
+
+            if (
+                not res
+                or not res.choices
+                or not res.choices[0].message
+                or not _has_actionable_message(res.choices[0].message)
+            ):
+                raise RuntimeError(
+                    "Decider failed after 3 attempts: no tool call or response content"
+                )
+
             next_message = res.choices[0].message.model_dump()
             action = message_to_action(next_message)
             tool_start_time = time.time()
@@ -336,8 +364,13 @@ def message_to_action(
             name=tool_call["function"]["name"],
             kwargs=json.loads(tool_call["function"]["arguments"]),
         )
-    else:
-        return Action(name=RESPOND_ACTION_NAME, kwargs={"content": message["content"]})
+    content = message.get("content")
+    if not isinstance(content, str) or not content.strip():
+        raise ValueError(
+            "Model returned neither a valid tool call nor non-empty response "
+            f"content: {message}"
+        )
+    return Action(name=RESPOND_ACTION_NAME, kwargs={"content": content})
 
 
 PREDICT_INSTRUCTION = f"""

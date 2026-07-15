@@ -95,6 +95,10 @@ class Env(object):
         done = False
         if action.name == RESPOND_ACTION_NAME:
             observation = self.user.step(action.kwargs["content"])
+            if observation is None:
+                raise RuntimeError(
+                    "User simulator returned content=None for a respond action"
+                )
             info.source = "user"
             done = "###STOP###" in observation
         elif action.name in self.tools_map:

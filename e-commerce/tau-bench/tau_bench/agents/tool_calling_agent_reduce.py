@@ -431,8 +431,13 @@ def message_to_action(
             name=tool_call["function"]["name"],
             kwargs=json.loads(tool_call["function"]["arguments"]),
         )
-    else:
-        return Action(name=RESPOND_ACTION_NAME, kwargs={"content": message["content"]})
+    content = message.get("content")
+    if not isinstance(content, str) or not content.strip():
+        raise ValueError(
+            "Model returned neither a valid tool call nor non-empty response "
+            f"content: {message}"
+        )
+    return Action(name=RESPOND_ACTION_NAME, kwargs={"content": content})
 
 
 PREDICT_INSTRUCTION = f"""

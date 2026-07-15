@@ -19,5 +19,6 @@ setup(
         "numpy>=1.26.4",
         "litellm>=1.41.0",
         "fastapi>=0.115.0",
+        "orjson>=3.10.0",
     ],
 )

@@ -3,7 +3,7 @@
     "model": {
         "model": "../../models/Qwen/Qwen3-14B",
         "provider": "local",
-        "base_url": "http://localhost:8000/v1",
+        "base_url": "http://localhost:8001/v1",
         "temperature": 1,
         "reasoning": "high"
     }

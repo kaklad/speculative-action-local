@@ -75,7 +75,7 @@ class ToolCallingStaticAgent(Agent):
         guesser["time"] = llm_duration
         return guesser
     
-    def _decider(self, index: int, messages_copy: List[Dict[str, Any]], env: Env, next_message: Dict[str, Any], guesser: Dict[str, Any], guesser_model: Dict[str, Any]):
+    def _decider(self, index: int, messages_copy: List[Dict[str, Any]], env: Env, next_message: Dict[str, Any], guesser: Dict[str, Any]):
         messages_copy.extend([next_message, {"role": "user", "content": guesser["output"]}])
         decider = {
             "id": index,
@@ -90,13 +90,11 @@ class ToolCallingStaticAgent(Agent):
                     llm_start_time = time.time()
                     res = completion(
                         messages=messages_copy,
-                        model=guesser_model["model"],
-                        custom_llm_provider=guesser_model["provider"],
+                        model=self.model,
+                        custom_llm_provider=self.provider,
                         tools=self.tools_info,
-                        temperature=guesser_model["temperature"],
-                        reasoning_effort=guesser_model["reasoning"],
-                        local_role="guess",
-                        api_base=guesser_model.get("base_url"),
+                        temperature=self.temperature,
+                        local_role="main",
                     )
                     llm_end_time = time.time()
                     llm_duration = llm_end_time - llm_start_time
@@ -204,7 +202,7 @@ class ToolCallingStaticAgent(Agent):
             if self.guesser_config is not None:
                 if self.guesser_config["type"] == "single":
                     guesser = guessers[0]
-                    decider, return_messages = self._decider(index, messages_copy, env, next_message, guesser, guesser_model)
+                    decider, return_messages = self._decider(index, messages_copy, env, next_message, guesser)
                     deciders.append(decider)
                     final_return_messages = copy.deepcopy(return_messages)
                 elif self.guesser_config["type"] == "multiple":

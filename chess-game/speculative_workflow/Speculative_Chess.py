@@ -295,9 +295,21 @@ class SpeculativeChessRunner:
         output_prediction_tokens = [prediction_results[3]] * len(predictions)
         total_prediction_tokens = [prediction_results[4]] * len(predictions)
 
-        # Remove None predictions and get unique predictions
-        valid_predictions = [p for p in predictions]
-        valid_prediction_times = [individual_prediction_times[i] for i in range(len(individual_prediction_times))]
+        # Keep only unique moves that are legal in the current position. A model
+        # can emit strings such as [e3e3] that match the UCI-shaped regex but are
+        # not valid chess moves and would make chess.Move.from_uci() raise.
+        valid_indices: List[int] = []
+        seen_predictions = set()
+        for i, prediction in enumerate(predictions):
+            if prediction in valid_moves and prediction not in seen_predictions:
+                valid_indices.append(i)
+                seen_predictions.add(prediction)
+
+        valid_predictions = [predictions[i] for i in valid_indices]
+        valid_prediction_times = [individual_prediction_times[i] for i in valid_indices]
+        input_prediction_tokens = [input_prediction_tokens[i] for i in valid_indices]
+        output_prediction_tokens = [output_prediction_tokens[i] for i in valid_indices]
+        total_prediction_tokens = [total_prediction_tokens[i] for i in valid_indices]
 
         if not valid_predictions:
             return [], [], [], [], [], [], [], [], [], [], []

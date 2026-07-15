@@ -10,23 +10,23 @@ pip install -e .
 3. Start local OpenAI-compatible model servers. This local setup assumes the Hugging Face models have already been downloaded under `../../models/`:
 
 ```text
-../../models/Qwen/Qwen3.5-4B
+../../models/Qwen/Qwen3.5-35B-A3B
 ../../models/Qwen/Qwen3-14B
 ```
 
 Run the main agent/user model:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.5-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 Run the fast guess model:
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
-The medium and high guess configurations reuse the 14B server on port 8000.
+All guess configurations use the 14B server on port 8001; the presets only change reasoning effort.
 
 SGLang works too as long as it exposes OpenAI-compatible `/v1/chat/completions` endpoints on the same ports. No OpenAI / Anthropic / Google / Mistral API keys are required for the local workflow.
 
@@ -68,11 +68,11 @@ python -m pip install -e .
 ### Local model servers
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3-14B --served-model-name ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8000 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3.5-35B-A3B --served-model-name ../../models/Qwen/Qwen3.5-35B-A3B --host 0.0.0.0 --port 8000 --max-model-len 8192
 ```
 
 ```bash
-vllm serve ../../models/Qwen/Qwen3.5-4B --served-model-name ../../models/Qwen/Qwen3.5-4B --host 0.0.0.0 --port 8001 --max-model-len 8192
+vllm serve ../../models/Qwen/Qwen3-14B --served-model-name ../../models/Qwen/Qwen3-14B --host 0.0.0.0 --port 8001 --max-model-len 8192
 ```
 
 ```bash
@@ -93,8 +93,8 @@ curl http://localhost:8001/v1/models
 
 ```bash
 python run.py --agent-strategy tool-calling-static --env retail \
-  --model ../../models/Qwen/Qwen3-14B --model-provider local \
-  --user-model ../../models/Qwen/Qwen3-14B --user-model-provider local \
+  --model ../../models/Qwen/Qwen3.5-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.5-35B-A3B --user-model-provider local \
   --user-strategy llm --max-concurrency 10 \
   --start-index 0 --end-index 115 \
   --guesser-config guess_configs/local_low.json \
@@ -105,8 +105,8 @@ python run.py --agent-strategy tool-calling-static --env retail \
 
 ```bash
 python run.py --agent-strategy tool-calling-static --env retail \
-  --model ../../models/Qwen/Qwen3-14B --model-provider local \
-  --user-model ../../models/Qwen/Qwen3-14B --user-model-provider local \
+  --model ../../models/Qwen/Qwen3.5-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.5-35B-A3B --user-model-provider local \
   --user-strategy llm --max-concurrency 10 \
   --start-index 0 --end-index 115 \
   --guesser-config guess_configs/local_medium.json \
@@ -117,8 +117,8 @@ python run.py --agent-strategy tool-calling-static --env retail \
 
 ```bash
 python run.py --agent-strategy tool-calling-static --env retail \
-  --model ../../models/Qwen/Qwen3-14B --model-provider local \
-  --user-model ../../models/Qwen/Qwen3-14B --user-model-provider local \
+  --model ../../models/Qwen/Qwen3.5-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.5-35B-A3B --user-model-provider local \
   --user-strategy llm --max-concurrency 10 \
   --start-index 0 --end-index 115 \
   --guesser-config guess_configs/local_high.json \
@@ -129,8 +129,8 @@ python run.py --agent-strategy tool-calling-static --env retail \
 
 ```bash
 python run.py --agent-strategy tool-calling-static --env retail \
-  --model ../../models/Qwen/Qwen3-14B --model-provider local \
-  --user-model ../../models/Qwen/Qwen3-14B --user-model-provider local \
+  --model ../../models/Qwen/Qwen3.5-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.5-35B-A3B --user-model-provider local \
   --user-strategy llm --max-concurrency 3 \
   --task-ids 2 4 6 \
   --guesser-config guess_configs/local_low.json \
@@ -141,8 +141,8 @@ python run.py --agent-strategy tool-calling-static --env retail \
 
 ```bash
 python run.py --agent-strategy tool-calling-static --env retail \
-  --model ../../models/Qwen/Qwen3-14B --model-provider local \
-  --user-model ../../models/Qwen/Qwen3-14B --user-model-provider local \
+  --model ../../models/Qwen/Qwen3.5-35B-A3B --model-provider local \
+  --user-model ../../models/Qwen/Qwen3.5-35B-A3B --user-model-provider local \
   --user-strategy llm --max-concurrency 10 \
   --start-index 0 --end-index 115 --log-dir results/local \
   --guesser-config guess_configs/local_low.json \

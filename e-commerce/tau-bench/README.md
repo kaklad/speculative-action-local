@@ -60,6 +60,46 @@ vllm serve ../../models/Qwen/Qwen3.5-9B --host 0.0.0.0 --port 8001 \
   --reasoning-parser qwen3 --language-model-only
 ```
 
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+CUDA_VISIBLE_DEVICES=0,1 \
+vllm serve ../../models/Qwen/Qwen3.6-35B-A3B \
+  --served-model-name ../../models/Qwen/Qwen3.6-35B-A3B \
+  --host 127.0.0.1 \
+  --port 8000 \
+  --tensor-parallel-size 2 \
+  --max-model-len 131072 \
+  --max-num-seqs 2 \
+  --gpu-memory-utilization 0.90 \
+  --kv-cache-dtype auto \
+  --enable-prefix-caching \
+  --enable-chunked-prefill \
+  --max-num-batched-tokens 16384 \
+  --disable-custom-all-reduce \
+  --enable-auto-tool-choice \
+  --tool-call-parser qwen3_coder \
+  --reasoning-parser qwen3 \
+  --language-model-only \
+  --trust-remote-code
+
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True \
+CUDA_VISIBLE_DEVICES=2 \
+vllm serve ../../models/Qwen/Qwen3.5-9B \
+  --served-model-name ../../models/Qwen/Qwen3.5-9B \
+  --host 127.0.0.1 \
+  --port 8001 \
+  --max-model-len 131072 \
+  --max-num-seqs 2 \
+  --gpu-memory-utilization 0.85 \
+  --kv-cache-dtype auto \
+  --enable-prefix-caching \
+  --enable-auto-tool-choice \
+  --tool-call-parser qwen3_coder \
+  --reasoning-parser qwen3 \
+  --language-model-only \
+  --trust-remote-code
+
+
+
 No OpenAI / Anthropic / Google / Mistral / AnyScale API keys are required when using `--model-provider local`.
 
 ## Run

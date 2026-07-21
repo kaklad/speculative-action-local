@@ -69,8 +69,6 @@ class ToolCallingReduceAgent(Agent):
         self._future: Optional[Future] = None
         self.guesser_config = guesser_config
         self.guesser_check = guesser_check
-        # self.embedding_model = SentenceTransformer("Qwen/Qwen3-Embedding-8B") if self.guesser_check else None
-        self.embedding_model = None
 
     def _guesser(self, index: int, user_query_prompt: str, guesser_model: Dict[str, Any]):
         guesser = {
@@ -267,15 +265,6 @@ class ToolCallingReduceAgent(Agent):
         else:
             raise ValueError(f"Invalid background agent type: {background_agent_type}")
         
-    def _cosine_similarity(self, query1: str, query2: str) -> float:
-        embeddings = self.embedding_model.encode([query1, query2])
-        embedding1 = embeddings[0]
-        embedding2 = embeddings[1]
-        cosine_similarity = np.dot(embedding1, embedding2) / (
-            np.linalg.norm(embedding1) * np.linalg.norm(embedding2)
-        )
-        return float(cosine_similarity)
-
     def solve(
         self, env: Env, task_index: Optional[int] = None, max_num_steps: int = 30
     ) -> SolveResult:
@@ -317,29 +306,46 @@ class ToolCallingReduceAgent(Agent):
                     self._future = None
             if self.start_user:
                 start_time = time.time()            
-            if return_messages is not None:
-                # compare the similarity between user_query_guess and all previous user queries
-                if self.guesser_check:
-                    for message in messages:
-                        if message["role"] == "user":
-                            similarity = self._cosine_similarity(user_query_guess, message["content"])
-                            print(f"Similarity between user_query_guess and user_query_real: {similarity}")
-                            if similarity > 0.6:
-                                for message in return_messages:
-                                    messages.extend(message)
-                                break
-                # append always
-                else:
+            has_spec = return_messages is not None and len(return_messages) > 0
+            if has_spec and self.guesser_check:
+                # Paper-faithful acceptance: commit the speculation only if its first
+                # speculated action EXACTLY matches (name + args) the action the actor
+                # really takes on the real conversation; otherwise discard it.
+                real_res = completion(
+                    messages=messages,
+                    model=self.model,
+                    custom_llm_provider=self.provider,
+                    tools=self.tools_info,
+                    temperature=self.temperature,
+                )
+                real_action = message_to_action(real_res.choices[0].message.model_dump())
+                spec_action = message_to_action(return_messages[0][0])
+                accepted = (
+                    spec_action.name == real_action.name
+                    and spec_action.kwargs == real_action.kwargs
+                )
+                if guesser_logs:
+                    guesser_logs[-1]["check_accepted"] = accepted
+                    guesser_logs[-1]["spec_action"] = {"name": spec_action.name, "kwargs": spec_action.kwargs}
+                    guesser_logs[-1]["real_action"] = {"name": real_action.name, "kwargs": real_action.kwargs}
+                # Speculation ran on a forked env (no real-env side effects), so the real
+                # action is always executed here. On a correct prediction this equals the
+                # speculated action (a real deployment would reuse the pre-computed result
+                # for latency); on an incorrect one it is safely discarded. Either way the
+                # graded env only ever sees real actions.
+                res = real_res
+            else:
+                # optimistic (no_check): commit every speculation, then act
+                if has_spec:
                     for message in return_messages:
                         messages.extend(message)
-
-            res = completion(
-                messages=messages,
-                model=self.model,
-                custom_llm_provider=self.provider,
-                tools=self.tools_info,
-                temperature=self.temperature
-            )
+                res = completion(
+                    messages=messages,
+                    model=self.model,
+                    custom_llm_provider=self.provider,
+                    tools=self.tools_info,
+                    temperature=self.temperature,
+                )
             next_message = res.choices[0].message.model_dump()
             # breakpoint()
             total_cost += response_cost(res)
@@ -349,7 +355,11 @@ class ToolCallingReduceAgent(Agent):
                 duration = end_time - start_time
                 if not self._future:
                     messages_copy = copy.deepcopy(messages)
-                    self._future = self._executor.submit(self._background_task, messages_copy, env, action, next_message, len(traj_logs))
+                    # In check mode, speculate on a forked env so background env.step()
+                    # calls never mutate the graded env (no pollution / no cross-thread
+                    # race). Optimistic mode intentionally commits to the real env.
+                    spec_env = copy.deepcopy(env) if self.guesser_check else env
+                    self._future = self._executor.submit(self._background_task, messages_copy, spec_env, action, next_message, len(traj_logs))
             tool_start_time = time.time()
             env_response = env.step(action)
             tool_end_time = time.time()

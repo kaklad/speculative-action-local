@@ -119,4 +119,5 @@ class LLMClient:
             frequency_penalty=0.0,
             presence_penalty=0.0,
         )
-        return response.choices[0].message.content
+        message = response.choices[0].message
+        return message.content if message.content is not None else getattr(message, "reasoning", None)
